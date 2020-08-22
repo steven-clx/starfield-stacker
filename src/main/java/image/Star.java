@@ -1,4 +1,4 @@
-package objects;
+package image;
 
 import util.ListUtil;
 import util.MathUtil;
@@ -108,8 +108,8 @@ public class Star {
 
 
     /**
-     * Add a segment added to the existing star when scanning from top to bottom.
-     * Segments must be added to a star sequentially (from top to bottom, left to right)
+     * Add a segment to the existing star when scanning from top to bottom.
+     * A star must add segments sequentially (from top to bottom, left to right)
      *
      * @param newSegment the added segment
      */
@@ -125,22 +125,40 @@ public class Star {
 
 
     /**
-     * Calculate the x coordinate of the center of the star
+     * Compute the x coordinate of the center of the star
      *
      * @return the x coordinate of the center of the star
      */
-    public short calcX() {
-        return (short) ((left + right) / 2);
+    public int computeX() {
+        return (left + right) / 2;
     }
 
 
     /**
-     * Calculate the y coordinate of the center of the star
+     * Compute the y coordinate of the center of the star
      *
      * @return the y coordinate of the center of the star
      */
-    public short calcY() {
-        return (short) ((top + bottom) / 2);
+    public int computeY() {
+        return (top + bottom) / 2;
+    }
+
+
+    /**
+     * Compute the average brightness of the star
+     *
+     * @return the average brightness of the star
+     */
+    public int computeAvgBrightness() {
+        float sum = 0;
+        int count = 0;
+        for (Segment segment : segments) {
+            for (Pixel p : segment.pixels()) {
+                sum += p.getR() + p.getG() + p.getB();
+                count++;
+            }
+        }
+        return Math.round(sum / (count * 3));
     }
 
 
@@ -149,9 +167,10 @@ public class Star {
         return segments;
     }
 
-    public Iterable<Pixel> pixels() {
-        List<Pixel> pixels = new ArrayList<>();
-        segments.forEach(s -> pixels.addAll(s.getPixels()));
+    public Iterable<StarPixel> pixels() {
+        List<StarPixel> pixels = new ArrayList<>();
+        for (Segment segment : segments)
+            pixels.addAll(segment.getPixels());
         return pixels;
     }
 
