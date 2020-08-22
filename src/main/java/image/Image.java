@@ -9,6 +9,7 @@ import java.awt.image.ColorModel;
 import java.awt.image.Raster;
 import java.io.File;
 import java.io.IOException;
+import java.util.Hashtable;
 
 
 public class Image implements Cloneable {
@@ -56,11 +57,11 @@ public class Image implements Cloneable {
         WriteConfig wc = RgbaPngWriteConfig.DEFAULT;
         Writer w = WriterDispatcher.getWriter(wc);
 
-        Resource _DSC7945_不透明 = new Resource(new Image(new File(folder + "_DSC7945.png")));
-        Resource _DSC7946_半透明 = new Resource(new Image(new File(folder + "_DSC7946.png")));
-        Resource _DSC7947_半透明 = new Resource(new Image(new File(folder + "_DSC7947.png")));
-        Resource _DSC7948_半透明 = new Resource(new Image(new File(folder + "_DSC7948.png")));
-        Resource _DSC7949_不透明 = new Resource(new Image(new File(folder + "_DSC7949.png")));
+//        Resource _DSC7945_不透明 = new Resource(new Image(new File(folder + "_DSC7945.png")));
+//        Resource _DSC7946_半透明 = new Resource(new Image(new File(folder + "_DSC7946.png")));
+//        Resource _DSC7947_半透明 = new Resource(new Image(new File(folder + "_DSC7947.png")));
+//        Resource _DSC7948_半透明 = new Resource(new Image(new File(folder + "_DSC7948.png")));
+//        Resource _DSC7949_不透明 = new Resource(new Image(new File(folder + "_DSC7949.png")));
 
 //        File _DSC7945_不透明 = new File(folder + "_DSC7945.png");
 //        File _DSC7946_半透明 = new File(folder + "_DSC7946.png");
@@ -72,24 +73,24 @@ public class Image implements Cloneable {
         Image _7945_不透明, _7946_半透明, _7947_半透明, _7948_半透明, _7949_不透明;
 
 
-        _7945_不透明 = _DSC7945_不透明.getImage();
-        _7946_半透明 = _DSC7946_半透明.getImage();
-        _7947_半透明 = _DSC7947_半透明.getImage();
-        _7948_半透明 = _DSC7948_半透明.getImage();
-        _7949_不透明 = _DSC7949_不透明.getImage();
+//        _7945_不透明 = _DSC7945_不透明.getImage();
+//        _7946_半透明 = _DSC7946_半透明.getImage();
+//        _7947_半透明 = _DSC7947_半透明.getImage();
+//        _7948_半透明 = _DSC7948_半透明.getImage();
+//        _7949_不透明 = _DSC7949_不透明.getImage();
 
-//        o_7945_不透明 = new Image(new File(folder + "_DSC7945.png"));
-//        o_7946_半透明 = new Image(new File(folder + "_DSC7946.png"));
-//        o_7947_半透明 = new Image(new File(folder + "_DSC7947.png"));
-//        o_7948_半透明 = new Image(new File(folder + "_DSC7948.png"));
-//        o_7949_不透明 = new Image(new File(folder + "_DSC7949.png"));
+        o_7945_不透明 = new Image(new File(folder + "_DSC7945.png"));
+        o_7946_半透明 = new Image(new File(folder + "_DSC7946.png"));
+        o_7947_半透明 = new Image(new File(folder + "_DSC7947.png"));
+        o_7948_半透明 = new Image(new File(folder + "_DSC7948.png"));
+        o_7949_不透明 = new Image(new File(folder + "_DSC7949.png"));
 
 
-//        _7945_不透明 = (Image) o_7945_不透明.clone();
-//        _7946_半透明 = (Image) o_7946_半透明.clone();
-//        _7947_半透明 = (Image) o_7947_半透明.clone();
-//        _7948_半透明 = (Image) o_7948_半透明.clone();
-//        _7949_不透明 = (Image) o_7949_不透明.clone();
+        _7945_不透明 = (Image) o_7945_不透明.clone();
+        _7946_半透明 = (Image) o_7946_半透明.clone();
+        _7947_半透明 = (Image) o_7947_半透明.clone();
+        _7948_半透明 = (Image) o_7948_半透明.clone();
+        _7949_不透明 = (Image) o_7949_不透明.clone();
 
 
 //        _7945_不透明 = new Image(_DSC7945_不透明);
@@ -102,7 +103,8 @@ public class Image implements Cloneable {
         _7947_半透明.blend(_7945_不透明, 1.0);
         _7947_半透明.setFileName("7947_半透明 + 7945_不透明 * 1.0");
         w.writeUpdated(_7947_半透明, folder, true);
-        _7947_半透明 = _DSC7947_半透明.getImage();
+//        Image _7947_半透明2 = _DSC7947_半透明.getImage();
+        Image _7947_半透明2 = (Image) o_7947_半透明.clone();
 //        _7947_半透明 = new Image(_DSC7947_半透明);
 //        _7947_半透明 = (Image) o_7947_半透明.clone();
 
@@ -110,7 +112,8 @@ public class Image implements Cloneable {
         _7949_不透明.blend(_7945_不透明, 1.0);
         _7949_不透明.setFileName("7949_不透明 + 7945_不透明 * 1.0");
         w.writeUpdated(_7949_不透明, folder, true);
-        _7949_不透明 = _DSC7949_不透明.getImage();
+//        Image _7949_不透明2 = _DSC7949_不透明.getImage();
+        Image _7949_不透明2 = (Image) o_7949_不透明.clone();
 //        _7949_不透明 = new Image(_DSC7949_不透明);
 //        _7949_不透明 = (Image) o_7949_不透明.clone();
 
@@ -118,74 +121,81 @@ public class Image implements Cloneable {
         _7945_不透明.blend(_7946_半透明, 0.72);
         _7945_不透明.setFileName("7945_不透明 + 7946_半透明 * 0.72");
         w.writeUpdated(_7945_不透明, folder, true);
-        _7945_不透明 = _DSC7945_不透明.getImage();
+//        Image _7945_不透明2 = _DSC7945_不透明.getImage();
+        Image _7945_不透明2 = (Image) o_7945_不透明.clone();
 //        _7945_不透明 = (Image) o_7945_不透明.clone();
 //        _7945_不透明 = new Image(_DSC7945_不透明);
 //        _7945_不透明 = new Image(new File(folder + "_DSC7945.png"));
 
 
 
-        _7945_不透明.blend(_7946_半透明, 1.0);
-        _7945_不透明.setFileName("7945_不透明 + 7946_半透明 * 1.0");
-        w.writeUpdated(_7945_不透明, folder, true);
-        _7945_不透明 = _DSC7945_不透明.getImage();
+        _7945_不透明2.blend(_7946_半透明, 1.0);
+        _7945_不透明2.setFileName("7945_不透明 + 7946_半透明 * 1.0");
+        w.writeUpdated(_7945_不透明2, folder, true);
+//        Image _7945_不透明3 = _DSC7945_不透明.getImage();
+        Image _7945_不透明3 = (Image) o_7945_不透明.clone();
 //        _7945_不透明 = (Image) o_7945_不透明.clone();
 //        _7945_不透明 = new Image(_DSC7945_不透明);
 //        _7945_不透明 = new Image(new File(folder + "_DSC7945.png"));
 
 
-        _7945_不透明.blend(_7949_不透明, 0.58);
-        _7945_不透明.setFileName("7945_不透明 + 7949_不透明 * 0.58");
-        w.writeUpdated(_7945_不透明, folder, true);
-        _7945_不透明 = _DSC7945_不透明.getImage();
+        _7945_不透明3.blend(_7949_不透明2, 0.58);
+        _7945_不透明3.setFileName("7945_不透明 + 7949_不透明 * 0.58");
+        w.writeUpdated(_7945_不透明3, folder, true);
+//        Image _7945_不透明4 = _DSC7945_不透明.getImage();
+        Image _7945_不透明4 = (Image) o_7945_不透明.clone();
 //        _7945_不透明 = (Image) o_7945_不透明.clone();
 //        _7945_不透明 = new Image(_DSC7945_不透明);
 //        _7945_不透明 = new Image(new File(folder + "_DSC7945.png"));
 
 
-        _7947_半透明.blend(_7948_半透明, 0.83);
-        _7947_半透明.setFileName("7947_半透明 + 7948_半透明 * 0.83");
-        w.writeUpdated(_7947_半透明, folder, true);
-        _7947_半透明 = _DSC7947_半透明.getImage();
+        _7947_半透明2.blend(_7948_半透明, 0.83);
+        _7947_半透明2.setFileName("7947_半透明 + 7948_半透明 * 0.83");
+        w.writeUpdated(_7947_半透明2, folder, true);
+//        Image _7947_半透明3 = _DSC7947_半透明.getImage();
+        Image _7947_半透明3 = (Image) o_7947_半透明.clone();
 //        _7947_半透明 = (Image) o_7947_半透明.clone();
 //        _7947_半透明 = new Image(_DSC7947_半透明);
 //        _7947_半透明 = new Image(new File(folder + "_DSC7947.png"));
 
 
-        _7947_半透明.blend(_7948_半透明, 1.0);
-        _7947_半透明.setFileName("7947_半透明 + 7948_半透明 * 1.0");
-        w.writeUpdated(_7947_半透明, folder, true);
-        _7947_半透明 = _DSC7947_半透明.getImage();
+        _7947_半透明3.blend(_7948_半透明, 1.0);
+        _7947_半透明3.setFileName("7947_半透明 + 7948_半透明 * 1.0");
+        w.writeUpdated(_7947_半透明3, folder, true);
+//        Image _7947_半透明4 = _DSC7947_半透明.getImage();
+        Image _7947_半透明4 = (Image) o_7947_半透明.clone();
 //        _7947_半透明 = (Image) o_7947_半透明.clone();
 //        _7947_半透明 = new Image(_DSC7947_半透明);
 //        _7947_半透明 = new Image(new File(folder + "_DSC7947.png"));
 
 
-        _7947_半透明.blend(_7949_不透明, 0.37);
-        _7947_半透明.setFileName("7947_半透明 + 7949_不透明 * 0.37");
-        w.writeUpdated(_7947_半透明, folder, true);
-        _7947_半透明 = _DSC7947_半透明.getImage();
+        _7947_半透明4.blend(_7949_不透明2, 0.37);
+        _7947_半透明4.setFileName("7947_半透明 + 7949_不透明 * 0.37");
+        w.writeUpdated(_7947_半透明4, folder, true);
+//        Image _7947_半透明5 = _DSC7947_半透明.getImage();
+        Image _7947_半透明5 = (Image) o_7947_半透明.clone();
 //        _7947_半透明 = (Image) o_7947_半透明.clone();
 //        _7947_半透明 = new Image(_DSC7947_半透明);
 //        _7947_半透明 = new Image(new File(folder + "_DSC7947.png"));
 
 
-        _7946_半透明.blend(_7947_半透明, 0.7);
+        _7946_半透明.blend(_7947_半透明5, 0.7);
         _7946_半透明.blend(_7948_半透明, 0.4);
         _7946_半透明.setFileName("7946_半透明 + 7947_半透明 * 0.7 + 7948_半透明 * 0.4");
         w.writeUpdated(_7946_半透明, folder, true);
-        _7946_半透明 = _DSC7946_半透明.getImage();
+//        Image _7946_半透明2 = _DSC7946_半透明.getImage();
+        Image _7946_半透明2 = (Image) o_7946_半透明.clone();
 //        _7946_半透明 = (Image) o_7946_半透明.clone();
 //        _7946_半透明 = new Image(_DSC7946_半透明);
 //        _7946_半透明 = new Image(new File(folder + "_DSC7946.png"));
 
 
-        _7945_不透明.blend(_7946_半透明, 0.8);
-        _7945_不透明.blend(_7947_半透明, 0.6);
-        _7945_不透明.blend(_7948_半透明, 0.4);
-        _7945_不透明.blend(_7949_不透明, 0.2);
-        _7945_不透明.setFileName("7945_不透明 + 7946_半透明 * 0.8 + 7947_半透明 * 0.6 + 7948_半透明 * 0.4 + 7949_不透明 * 0.2");
-        w.writeUpdated(_7945_不透明, folder, true);
+        _7945_不透明4.blend(_7946_半透明2, 0.8);
+        _7945_不透明4.blend(_7947_半透明5, 0.6);
+        _7945_不透明4.blend(_7948_半透明, 0.4);
+        _7945_不透明4.blend(_7949_不透明2, 0.2);
+        _7945_不透明4.setFileName("7945_不透明 + 7946_半透明 * 0.8 + 7947_半透明 * 0.6 + 7948_半透明 * 0.4 + 7949_不透明 * 0.2");
+        w.writeUpdated(_7945_不透明4, folder, true);
 
 
     }
@@ -411,6 +421,13 @@ public class Image implements Cloneable {
         for (int i = 0; i < width * height; i++)
             pixels[i] = new RgbPixel(0, 0, 0, i % width, i / width);
     }
+
+
+
+
+
+
+
 
 
     private void initByBufferedImage(BufferedImage bi) {
@@ -641,6 +658,76 @@ public class Image implements Cloneable {
     }
 
 
+    @Override
+    public Object clone() {
+        try {
+            Image cloned = (Image) super.clone();
+            cloned.width = width;
+            cloned.height = height;
+            cloned.hasAlpha = hasAlpha;
+            Hashtable<String, Object> properties = new Hashtable<>();
+            String[] propertyNames;
+            if ((propertyNames = bufferedImage.getPropertyNames()) != null) {
+                for (String key : propertyNames) {
+                    properties.put(key, bufferedImage.getProperty(key));
+                }
+            }
+            cloned.bufferedImage = new BufferedImage(bufferedImage.getColorModel(), bufferedImage.getRaster(), bufferedImage.isAlphaPremultiplied(), properties);
+
+
+
+
+            int length = width * height;
+            cloned.pixels = new RgbPixel[length];
+
+            ColorModel cm = cloned.bufferedImage.getColorModel();
+            cloned.hasAlpha = cm.hasAlpha();
+
+            Raster raster = cloned.bufferedImage.getRaster();
+
+
+            Object dataElement = null;
+
+            if (hasAlpha) {
+
+                for (int i = 0; i < length; i++) {
+
+                    int x = i % width;
+                    int y = i / width;
+
+                    dataElement = raster.getDataElements(x, y, dataElement);
+                    int alpha = cm.getAlpha(dataElement);
+
+                    if (alpha == 255) {
+                        cloned.pixels[i] = new RgbPixel(cm.getRed(dataElement), cm.getGreen(dataElement), cm.getBlue(dataElement), x, y);
+                    } else {
+                        cloned.pixels[i] = new RgbaPixel(cm.getRed(dataElement), cm.getGreen(dataElement), cm.getBlue(dataElement), alpha, x, y);
+                    }
+                }
+
+            } else {
+                for (int i = 0; i < length; i++) {
+
+                    int x = i % width;
+                    int y = i / width;
+
+                    dataElement = raster.getDataElements(x, y, dataElement);
+                    cloned.pixels[i] = new RgbPixel(cm.getRed(dataElement), cm.getGreen(dataElement), cm.getBlue(dataElement), x, y);
+                }
+            }
+
+
+
+
+
+            cloned.fileName = fileName;
+            return cloned;
+        } catch (CloneNotSupportedException e) {
+            throw new Error();
+        }
+    }
+
+
 //    @Override
 //    public Object clone() {
 //        try {
@@ -648,13 +735,28 @@ public class Image implements Cloneable {
 //            cloned.width = width;
 //            cloned.height = height;
 //            cloned.hasAlpha = hasAlpha;
-//            cloned.bufferedImage = new BufferedImage(width, height, bufferedImage.getType());;
+//            cloned.bufferedImage = new BufferedImage(width, height, bufferedImage.getType());
 //            RgbPixel[] clonedPixels = new RgbPixel[pixels.length];
 //            for (int i = 0; i < pixels.length; i++) {
 //                RgbPixel toClone = pixels[i];
 //                clonedPixels[i] = toClone.hasAlpha() ? new RgbaPixel((RgbaPixel) toClone) : new RgbPixel(toClone);
 //            }
 //            cloned.pixels = clonedPixels;
+//            cloned.fileName = fileName;
+//            return cloned;
+//        } catch (CloneNotSupportedException e) {
+//            throw new Error();
+//        }
+//    }
+
+
+//    @Override
+//    public Object clone() {
+//        try {
+//            updateBufferedImageByPixels();
+//            Image cloned = (Image) super.clone();
+//            cloned.initByBufferedImage(bufferedImage);
+//            cloned.bufferedImage = new BufferedImage(cloned.width, cloned.height, bufferedImage.getType());
 //            cloned.fileName = fileName;
 //            return cloned;
 //        } catch (CloneNotSupportedException e) {
