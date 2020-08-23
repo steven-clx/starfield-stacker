@@ -111,9 +111,9 @@ public class Image implements Cloneable {
         _7947_半透明.setFileName("7947_半透明 + 7945_不透明 * 1.0");
         w.writeUpdated(_7947_半透明, folder, true);
 //        Image _7947_半透明2 = _DSC7947_半透明.getImage();
-        Image _7947_半透明2 = (Image) o_7947_半透明.clone();
+//        Image _7947_半透明2 = (Image) o_7947_半透明.clone();
 //        _7947_半透明 = new Image(_DSC7947_半透明);
-//        _7947_半透明 = (Image) o_7947_半透明.clone();
+        _7947_半透明 = (Image) o_7947_半透明.clone();
 
         System.out.println(System.currentTimeMillis());
 
@@ -122,9 +122,9 @@ public class Image implements Cloneable {
         _7949_不透明.setFileName("7949_不透明 + 7945_不透明 * 1.0");
         w.writeUpdated(_7949_不透明, folder, true);
 //        Image _7949_不透明2 = _DSC7949_不透明.getImage();
-        Image _7949_不透明2 = (Image) o_7949_不透明.clone();
+//        Image _7949_不透明2 = (Image) o_7949_不透明.clone();
 //        _7949_不透明 = new Image(_DSC7949_不透明);
-//        _7949_不透明 = (Image) o_7949_不透明.clone();
+        _7949_不透明 = (Image) o_7949_不透明.clone();
 
         System.out.println(System.currentTimeMillis());
 
@@ -133,8 +133,8 @@ public class Image implements Cloneable {
         _7945_不透明.setFileName("7945_不透明 + 7946_半透明 * 0.72");
         w.writeUpdated(_7945_不透明, folder, true);
 //        Image _7945_不透明2 = _DSC7945_不透明.getImage();
-        Image _7945_不透明2 = (Image) o_7945_不透明.clone();
-//        _7945_不透明 = (Image) o_7945_不透明.clone();
+//        Image _7945_不透明2 = (Image) o_7945_不透明.clone();
+        _7945_不透明 = (Image) o_7945_不透明.clone();
 //        _7945_不透明 = new Image(_DSC7945_不透明);
 //        _7945_不透明 = new Image(new File(folder + "_DSC7945.png"));
 
@@ -142,85 +142,85 @@ public class Image implements Cloneable {
 
 
 
-        _7945_不透明2.blend(_7946_半透明, 1.0);
-        _7945_不透明2.setFileName("7945_不透明 + 7946_半透明 * 1.0");
-        w.writeUpdated(_7945_不透明2, folder, true);
+        _7945_不透明.blend(_7946_半透明, 1.0);
+        _7945_不透明.setFileName("7945_不透明 + 7946_半透明 * 1.0");
+        w.writeUpdated(_7945_不透明, folder, true);
 //        Image _7945_不透明3 = _DSC7945_不透明.getImage();
-        Image _7945_不透明3 = (Image) o_7945_不透明.clone();
-//        _7945_不透明 = (Image) o_7945_不透明.clone();
+//        Image _7945_不透明3 = (Image) o_7945_不透明.clone();
+        _7945_不透明 = (Image) o_7945_不透明.clone();
 //        _7945_不透明 = new Image(_DSC7945_不透明);
 //        _7945_不透明 = new Image(new File(folder + "_DSC7945.png"));
 
         System.out.println(System.currentTimeMillis());
 
 
-        _7945_不透明3.blend(_7949_不透明2, 0.58);
-        _7945_不透明3.setFileName("7945_不透明 + 7949_不透明 * 0.58");
-        w.writeUpdated(_7945_不透明3, folder, true);
+        _7945_不透明.blend(_7949_不透明, 0.58);
+        _7945_不透明.setFileName("7945_不透明 + 7949_不透明 * 0.58");
+        w.writeUpdated(_7945_不透明, folder, true);
 //        Image _7945_不透明4 = _DSC7945_不透明.getImage();
-        Image _7945_不透明4 = (Image) o_7945_不透明.clone();
-//        _7945_不透明 = (Image) o_7945_不透明.clone();
+//        Image _7945_不透明4 = (Image) o_7945_不透明.clone();
+        _7945_不透明 = (Image) o_7945_不透明.clone();
 //        _7945_不透明 = new Image(_DSC7945_不透明);
 //        _7945_不透明 = new Image(new File(folder + "_DSC7945.png"));
 
         System.out.println(System.currentTimeMillis());
 
 
-        _7947_半透明2.blend(_7948_半透明, 0.83);
-        _7947_半透明2.setFileName("7947_半透明 + 7948_半透明 * 0.83");
-        w.writeUpdated(_7947_半透明2, folder, true);
+        _7947_半透明.blend(_7948_半透明, 0.83);
+        _7947_半透明.setFileName("7947_半透明 + 7948_半透明 * 0.83");
+        w.writeUpdated(_7947_半透明, folder, true);
 //        Image _7947_半透明3 = _DSC7947_半透明.getImage();
-        Image _7947_半透明3 = (Image) o_7947_半透明.clone();
-//        _7947_半透明 = (Image) o_7947_半透明.clone();
+//        Image _7947_半透明3 = (Image) o_7947_半透明.clone();
+        _7947_半透明 = (Image) o_7947_半透明.clone();
 //        _7947_半透明 = new Image(_DSC7947_半透明);
 //        _7947_半透明 = new Image(new File(folder + "_DSC7947.png"));
 
         System.out.println(System.currentTimeMillis());
 
 
-        _7947_半透明3.blend(_7948_半透明, 1.0);
-        _7947_半透明3.setFileName("7947_半透明 + 7948_半透明 * 1.0");
-        w.writeUpdated(_7947_半透明3, folder, true);
+        _7947_半透明.blend(_7948_半透明, 1.0);
+        _7947_半透明.setFileName("7947_半透明 + 7948_半透明 * 1.0");
+        w.writeUpdated(_7947_半透明, folder, true);
 //        Image _7947_半透明4 = _DSC7947_半透明.getImage();
-        Image _7947_半透明4 = (Image) o_7947_半透明.clone();
-//        _7947_半透明 = (Image) o_7947_半透明.clone();
+//        Image _7947_半透明4 = (Image) o_7947_半透明.clone();
+        _7947_半透明 = (Image) o_7947_半透明.clone();
 //        _7947_半透明 = new Image(_DSC7947_半透明);
 //        _7947_半透明 = new Image(new File(folder + "_DSC7947.png"));
 
         System.out.println(System.currentTimeMillis());
 
 
-        _7947_半透明4.blend(_7949_不透明2, 0.37);
-        _7947_半透明4.setFileName("7947_半透明 + 7949_不透明 * 0.37");
-        w.writeUpdated(_7947_半透明4, folder, true);
+        _7947_半透明.blend(_7949_不透明, 0.37);
+        _7947_半透明.setFileName("7947_半透明 + 7949_不透明 * 0.37");
+        w.writeUpdated(_7947_半透明, folder, true);
 //        Image _7947_半透明5 = _DSC7947_半透明.getImage();
-        Image _7947_半透明5 = (Image) o_7947_半透明.clone();
-//        _7947_半透明 = (Image) o_7947_半透明.clone();
+//        Image _7947_半透明5 = (Image) o_7947_半透明.clone();
+        _7947_半透明 = (Image) o_7947_半透明.clone();
 //        _7947_半透明 = new Image(_DSC7947_半透明);
 //        _7947_半透明 = new Image(new File(folder + "_DSC7947.png"));
 
         System.out.println(System.currentTimeMillis());
 
 
-        _7946_半透明.blend(_7947_半透明5, 0.7);
+        _7946_半透明.blend(_7947_半透明, 0.7);
         _7946_半透明.blend(_7948_半透明, 0.4);
         _7946_半透明.setFileName("7946_半透明 + 7947_半透明 * 0.7 + 7948_半透明 * 0.4");
         w.writeUpdated(_7946_半透明, folder, true);
 //        Image _7946_半透明2 = _DSC7946_半透明.getImage();
-        Image _7946_半透明2 = (Image) o_7946_半透明.clone();
-//        _7946_半透明 = (Image) o_7946_半透明.clone();
+//        Image _7946_半透明2 = (Image) o_7946_半透明.clone();
+        _7946_半透明 = (Image) o_7946_半透明.clone();
 //        _7946_半透明 = new Image(_DSC7946_半透明);
 //        _7946_半透明 = new Image(new File(folder + "_DSC7946.png"));
 
         System.out.println(System.currentTimeMillis());
 
 
-        _7945_不透明4.blend(_7946_半透明2, 0.8);
-        _7945_不透明4.blend(_7947_半透明5, 0.6);
-        _7945_不透明4.blend(_7948_半透明, 0.4);
-        _7945_不透明4.blend(_7949_不透明2, 0.2);
-        _7945_不透明4.setFileName("7945_不透明 + 7946_半透明 * 0.8 + 7947_半透明 * 0.6 + 7948_半透明 * 0.4 + 7949_不透明 * 0.2");
-        w.writeUpdated(_7945_不透明4, folder, true);
+        _7945_不透明.blend(_7946_半透明, 0.8);
+        _7945_不透明.blend(_7947_半透明, 0.6);
+        _7945_不透明.blend(_7948_半透明, 0.4);
+        _7945_不透明.blend(_7949_不透明, 0.2);
+        _7945_不透明.setFileName("7945_不透明 + 7946_半透明 * 0.8 + 7947_半透明 * 0.6 + 7948_半透明 * 0.4 + 7949_不透明 * 0.2");
+        w.writeUpdated(_7945_不透明, folder, true);
 
         System.out.println(System.currentTimeMillis());
     }
