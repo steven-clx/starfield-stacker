@@ -32,7 +32,7 @@ public class Image implements Cloneable {
 
 
 
-    private static long time;
+    private static long time = System.currentTimeMillis();
 
     private static Runtime runtime = Runtime.getRuntime();
     private static NumberFormat format = NumberFormat.getInstance();
@@ -40,6 +40,17 @@ public class Image implements Cloneable {
     private static Image placeholder;
 
     private static List<Image> images = new ArrayList<>();
+
+    private static long maxMemory;
+    private static long allocatedMemory;
+    private static long freeMemory;
+
+    static {
+        maxMemory = runtime.maxMemory();
+        allocatedMemory = runtime.totalMemory();
+        freeMemory = runtime.freeMemory();
+    }
+
 
 
     public static void main(String[] args) {
@@ -50,7 +61,7 @@ public class Image implements Cloneable {
     public static void speedAndRamTest() {
 
         File root = new File("/Volumes/Backup Plus/2020 Perseids/2020/2020-08-13/jpg/all/");
-        time = System.currentTimeMillis();
+
 
         Arrays.stream(root.listFiles()).filter(f -> f.isFile() && f.getName().endsWith(".jpg") && f.getName().startsWith("_DSC") && f.getName().length() == 12).forEach(action());
 
@@ -58,29 +69,85 @@ public class Image implements Cloneable {
 
     public static Consumer<File> action() {
         return f -> {
-
-            Image image = new Image(f);
-            images.add(image);
-
+            images.add(new Image(f));
 
             System.out.println((- time + (time = System.currentTimeMillis())) / 1000d);
 
-            System.out.println(getMemoryInfo());
+            printMemoryInfo();
 
 
         };
     }
 
 
-    public static String getMemoryInfo() {
+    public static void printMemoryInfo() {
         long maxMemory = runtime.maxMemory();
         long allocatedMemory = runtime.totalMemory();
         long freeMemory = runtime.freeMemory();
 
-        return "free memory: " + format.format(freeMemory / 1024) + ", " +
-                "allocated memory: " + format.format(allocatedMemory / 1024) + ", " +
-                "max memory: " + format.format(maxMemory / 1024) + ", " +
-                "total free memory: " + format.format((freeMemory + (maxMemory - allocatedMemory)) / 1024);
+        System.out.println("" +
+                "max: " + format.format(maxMemory / 1024) + ", " +
+                "allocated: " + format.format(allocatedMemory / 1024) + ", " +
+                "used: " + format.format((allocatedMemory - freeMemory) / 1024) + ", " +
+                "free: " + format.format(freeMemory / 1024) + ", " +
+                "reserved: " + format.format((maxMemory - allocatedMemory) / 1024) + ", " +
+                "usable: " + format.format((freeMemory + (maxMemory - allocatedMemory)) / 1024) +
+                " - " +
+                ((allocatedMemory - freeMemory) / 1024 / images.size() + " / " + images.size()) +
+                "");
+
+        if (maxMemory > Image.maxMemory) {
+            long addedMaxSpace = maxMemory - Image.maxMemory;
+            System.out.print("Max扩容: " + addedMaxSpace / 1024);
+            if (allocatedMemory < maxMemory) {
+                System.out.println();
+                System.err.println("allocatedMemory有误");
+            } else {
+                long addedSpace = allocatedMemory - Image.allocatedMemory;
+                System.out.print(" + 扩容: " + addedSpace / 1024);
+
+                long increasedSpace = freeMemory - Image.freeMemory;
+                if (increasedSpace > addedSpace) {
+                    System.out.print(" + GC: " + (increasedSpace - addedSpace) / 1024);
+                }
+                System.out.println();
+            }
+        } else if (maxMemory == Image.maxMemory) {
+            if (allocatedMemory > Image.allocatedMemory) {
+                long addedSpace = allocatedMemory - Image.allocatedMemory;
+                System.out.print("扩容: " + addedSpace / 1024);
+
+                long increasedSpace = freeMemory - Image.freeMemory;
+                if (increasedSpace > addedSpace) {
+                    System.out.print(" + GC: " + (increasedSpace - addedSpace) / 1024);
+                }
+                System.out.println();
+            } else if (allocatedMemory == Image.allocatedMemory) {
+                long increasedSpace = freeMemory - Image.freeMemory;
+                if (increasedSpace > 0) {
+                    System.out.println("GC: " + increasedSpace / 1024);
+                }
+            } else {
+                long reducedSpace = Image.allocatedMemory - allocatedMemory;
+                System.out.print("减容: " + reducedSpace / 1024);
+
+                long decreasedSpace = Image.freeMemory - freeMemory;
+                if (decreasedSpace < reducedSpace) {
+                    System.out.print(" + GC: " + (reducedSpace - decreasedSpace) / 1024);
+                }
+                System.out.println();
+            }
+        } else {
+            System.err.println("maxMemory有误");
+        }
+
+        System.out.println();
+
+        Image.maxMemory = maxMemory;
+        Image.allocatedMemory = allocatedMemory;
+        Image.freeMemory = freeMemory;
+
+
     }
 
 

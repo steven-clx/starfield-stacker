@@ -8,30 +8,30 @@ class Resource {
         this.image = image;
     }
 
-    Image getImage() {
-//        Image copy = new Image(image.getBufferedImage());
-//        copy.setFileName(image.getFileName());
-
-        return (Image) image.clone();
-
-
-
-//        Image copy = new Image(image.getWidth(), image.getHeight(), image.type);
+//    Image getImage() {
+////        Image copy = new Image(image.getBufferedImage());
+////        copy.setFileName(image.getFileName());
 //
-//        RgbPixel[] cpyPixels = copy.getPixels();
-//        RgbPixel[] srcPixels = image.getPixels();
+//        return (Image) image.clone();
 //
-//        RgbPixel srcPixel;
 //
-//        for (int i = 0; i < image.getWidth() * image.getHeight(); i++) {
-//            srcPixel = srcPixels[i];
-//            cpyPixels[i] = srcPixel.hasAlpha() ? new RgbaPixel((RgbaPixel) srcPixel) : new RgbPixel(srcPixel);
-//        }
 //
-//        copy.setHasAlpha(image.hasAlpha());
-//        copy.setFileName(image.getFileName());
-
-//        return copy;
-    }
+////        Image copy = new Image(image.getWidth(), image.getHeight(), image.type);
+////
+////        RgbPixel[] cpyPixels = copy.getPixels();
+////        RgbPixel[] srcPixels = image.getPixels();
+////
+////        RgbPixel srcPixel;
+////
+////        for (int i = 0; i < image.getWidth() * image.getHeight(); i++) {
+////            srcPixel = srcPixels[i];
+////            cpyPixels[i] = srcPixel.hasAlpha() ? new RgbaPixel((RgbaPixel) srcPixel) : new RgbPixel(srcPixel);
+////        }
+////
+////        copy.setHasAlpha(image.hasAlpha());
+////        copy.setFileName(image.getFileName());
+//
+////        return copy;
+//    }
 
 }
