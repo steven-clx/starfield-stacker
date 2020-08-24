@@ -9,7 +9,12 @@ import java.awt.image.ColorModel;
 import java.awt.image.Raster;
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.function.Consumer;
 
 
 public class Image implements Cloneable {
@@ -25,10 +30,57 @@ public class Image implements Cloneable {
     private static final int DEFAULT_RGB_TYPE = BufferedImage.TYPE_3BYTE_BGR;
 
 
+
+
+    private static long time;
+
+    private static Runtime runtime = Runtime.getRuntime();
+    private static NumberFormat format = NumberFormat.getInstance();
+
+    private static Image placeholder;
+
+    private static List<Image> images = new ArrayList<>();
+
+
     public static void main(String[] args) {
-        System.out.println(System.currentTimeMillis());
-        productionTest();
-        System.out.println(System.currentTimeMillis());
+        speedAndRamTest();
+    }
+
+
+    public static void speedAndRamTest() {
+
+        File root = new File("/Volumes/Backup Plus/2020 Perseids/2020/2020-08-13/jpg/all/");
+        time = System.currentTimeMillis();
+
+        Arrays.stream(root.listFiles()).filter(f -> f.isFile() && f.getName().endsWith(".jpg") && f.getName().startsWith("_DSC") && f.getName().length() == 12).forEach(action());
+
+    }
+
+    public static Consumer<File> action() {
+        return f -> {
+
+            Image image = new Image(f);
+            images.add(image);
+
+
+            System.out.println((- time + (time = System.currentTimeMillis())) / 1000d);
+
+            System.out.println(getMemoryInfo());
+
+
+        };
+    }
+
+
+    public static String getMemoryInfo() {
+        long maxMemory = runtime.maxMemory();
+        long allocatedMemory = runtime.totalMemory();
+        long freeMemory = runtime.freeMemory();
+
+        return "free memory: " + format.format(freeMemory / 1024) + ", " +
+                "allocated memory: " + format.format(allocatedMemory / 1024) + ", " +
+                "max memory: " + format.format(maxMemory / 1024) + ", " +
+                "total free memory: " + format.format((freeMemory + (maxMemory - allocatedMemory)) / 1024);
     }
 
 
@@ -53,6 +105,8 @@ public class Image implements Cloneable {
 
             45～49
          */
+
+        long time = System.currentTimeMillis();
 
         String folder = "/Volumes/Backup Plus/2020 Perseids/2020/2020-08-13/jpg/all/blend_test/";
 
@@ -103,7 +157,7 @@ public class Image implements Cloneable {
 //        _7948_半透明 = (Image) o_7948_半透明.clone();
 //        _7949_不透明 = (Image) o_7949_不透明.clone();
 
-        System.out.println(System.currentTimeMillis());
+        System.out.println((- time + (time = System.currentTimeMillis())) / 1000d);
 
 
         _7947_半透明.blend(_7945_不透明, 1.0);
@@ -114,7 +168,7 @@ public class Image implements Cloneable {
 //        _7947_半透明 = (Image) o_7947_半透明.clone();
         _7947_半透明 = new Image(_DSC7947_半透明);
 
-        System.out.println(System.currentTimeMillis());
+        System.out.println((- time + (time = System.currentTimeMillis())) / 1000d);
 
 
         _7949_不透明.blend(_7945_不透明, 1.0);
@@ -125,7 +179,7 @@ public class Image implements Cloneable {
 //        _7949_不透明 = (Image) o_7949_不透明.clone();
         _7949_不透明 = new Image(_DSC7949_不透明);
 
-        System.out.println(System.currentTimeMillis());
+        System.out.println((- time + (time = System.currentTimeMillis())) / 1000d);
 
 
         _7945_不透明.blend(_7946_半透明, 0.72);
@@ -136,7 +190,7 @@ public class Image implements Cloneable {
 //        _7945_不透明 = (Image) o_7945_不透明.clone();
         _7945_不透明 = new Image(_DSC7945_不透明);
 
-        System.out.println(System.currentTimeMillis());
+        System.out.println((- time + (time = System.currentTimeMillis())) / 1000d);
 
 
 
@@ -148,7 +202,7 @@ public class Image implements Cloneable {
 //        _7945_不透明 = (Image) o_7945_不透明.clone();
         _7945_不透明 = new Image(_DSC7945_不透明);
 
-        System.out.println(System.currentTimeMillis());
+        System.out.println((- time + (time = System.currentTimeMillis())) / 1000d);
 
 
         _7945_不透明.blend(_7949_不透明, 0.58);
@@ -159,7 +213,7 @@ public class Image implements Cloneable {
 //        _7945_不透明 = (Image) o_7945_不透明.clone();
         _7945_不透明 = new Image(_DSC7945_不透明);
 
-        System.out.println(System.currentTimeMillis());
+        System.out.println((- time + (time = System.currentTimeMillis())) / 1000d);
 
 
         _7947_半透明.blend(_7948_半透明, 0.83);
@@ -170,7 +224,7 @@ public class Image implements Cloneable {
 //        _7947_半透明 = (Image) o_7947_半透明.clone();
         _7947_半透明 = new Image(_DSC7947_半透明);
 
-        System.out.println(System.currentTimeMillis());
+        System.out.println((- time + (time = System.currentTimeMillis())) / 1000d);
 
 
         _7947_半透明.blend(_7948_半透明, 1.0);
@@ -181,7 +235,7 @@ public class Image implements Cloneable {
 //        _7947_半透明 = (Image) o_7947_半透明.clone();
         _7947_半透明 = new Image(_DSC7947_半透明);
 
-        System.out.println(System.currentTimeMillis());
+        System.out.println((- time + (time = System.currentTimeMillis())) / 1000d);
 
 
         _7947_半透明.blend(_7949_不透明, 0.37);
@@ -192,7 +246,7 @@ public class Image implements Cloneable {
 //        _7947_半透明 = (Image) o_7947_半透明.clone();
         _7947_半透明 = new Image(_DSC7947_半透明);
 
-        System.out.println(System.currentTimeMillis());
+        System.out.println((- time + (time = System.currentTimeMillis())) / 1000d);
 
 
         _7946_半透明.blend(_7947_半透明, 0.7);
@@ -204,7 +258,7 @@ public class Image implements Cloneable {
 //        _7946_半透明 = (Image) o_7946_半透明.clone();
         _7946_半透明 = new Image(_DSC7946_半透明);
 
-        System.out.println(System.currentTimeMillis());
+        System.out.println((- time + (time = System.currentTimeMillis())) / 1000d);
 
 
         _7945_不透明.blend(_7946_半透明, 0.8);
@@ -214,7 +268,7 @@ public class Image implements Cloneable {
         _7945_不透明.setFileName("7945_不透明 + 7946_半透明 * 0.8 + 7947_半透明 * 0.6 + 7948_半透明 * 0.4 + 7949_不透明 * 0.2");
         w.writeUpdated(_7945_不透明, folder, true);
 
-        System.out.println(System.currentTimeMillis());
+        System.out.println((- time + (time = System.currentTimeMillis())) / 1000d);
     }
 
 

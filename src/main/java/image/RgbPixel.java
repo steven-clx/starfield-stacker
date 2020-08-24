@@ -11,7 +11,7 @@ import util.MathUtil;
 public class RgbPixel implements Pixel {
 
 
-    byte r, g, b;
+    int r, g, b;
     short x, y;
 
 
