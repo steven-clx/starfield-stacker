@@ -65,14 +65,19 @@ public class Image implements Cloneable {
 //        Resource _DSC7948_半透明 = new Resource(new Image(new File(folder + "_DSC7948.png")));
 //        Resource _DSC7949_不透明 = new Resource(new Image(new File(folder + "_DSC7949.png")));
 
-//        File _DSC7945_不透明 = new File(folder + "_DSC7945.png");
-//        File _DSC7946_半透明 = new File(folder + "_DSC7946.png");
-//        File _DSC7947_半透明 = new File(folder + "_DSC7947.png");
-//        File _DSC7948_半透明 = new File(folder + "_DSC7948.png");
-//        File _DSC7949_不透明 = new File(folder + "_DSC7949.png");
+        File _DSC7945_不透明 = new File(folder + "_DSC7945.png");
+        File _DSC7946_半透明 = new File(folder + "_DSC7946.png");
+        File _DSC7947_半透明 = new File(folder + "_DSC7947.png");
+        File _DSC7948_半透明 = new File(folder + "_DSC7948.png");
+        File _DSC7949_不透明 = new File(folder + "_DSC7949.png");
+        Image _7945_不透明 = new Image(_DSC7945_不透明);
+        Image _7946_半透明 = new Image(_DSC7946_半透明);
+        Image _7947_半透明 = new Image(_DSC7947_半透明);
+        Image _7948_半透明 = new Image(_DSC7948_半透明);
+        Image _7949_不透明 = new Image(_DSC7949_不透明);
 
-        Image o_7945_不透明, o_7946_半透明, o_7947_半透明, o_7948_半透明, o_7949_不透明;
-        Image _7945_不透明, _7946_半透明, _7947_半透明, _7948_半透明, _7949_不透明;
+//        Image o_7945_不透明, o_7946_半透明, o_7947_半透明, o_7948_半透明, o_7949_不透明;
+//        Image _7945_不透明, _7946_半透明, _7947_半透明, _7948_半透明, _7949_不透明;
 
 
 //        _7945_不透明 = _DSC7945_不透明.getImage();
@@ -81,30 +86,24 @@ public class Image implements Cloneable {
 //        _7948_半透明 = _DSC7948_半透明.getImage();
 //        _7949_不透明 = _DSC7949_不透明.getImage();
 
+//        System.out.println(System.currentTimeMillis());
+
+//        o_7945_不透明 = new Image(new File(folder + "_DSC7945.png"));
+//        o_7946_半透明 = new Image(new File(folder + "_DSC7946.png"));
+//        o_7947_半透明 = new Image(new File(folder + "_DSC7947.png"));
+//        o_7948_半透明 = new Image(new File(folder + "_DSC7948.png"));
+//        o_7949_不透明 = new Image(new File(folder + "_DSC7949.png"));
+
+//        System.out.println(System.currentTimeMillis());
+
+
+//        _7945_不透明 = (Image) o_7945_不透明.clone();
+//        _7946_半透明 = (Image) o_7946_半透明.clone();
+//        _7947_半透明 = (Image) o_7947_半透明.clone();
+//        _7948_半透明 = (Image) o_7948_半透明.clone();
+//        _7949_不透明 = (Image) o_7949_不透明.clone();
+
         System.out.println(System.currentTimeMillis());
-
-        o_7945_不透明 = new Image(new File(folder + "_DSC7945.png"));
-        o_7946_半透明 = new Image(new File(folder + "_DSC7946.png"));
-        o_7947_半透明 = new Image(new File(folder + "_DSC7947.png"));
-        o_7948_半透明 = new Image(new File(folder + "_DSC7948.png"));
-        o_7949_不透明 = new Image(new File(folder + "_DSC7949.png"));
-
-        System.out.println(System.currentTimeMillis());
-
-
-        _7945_不透明 = (Image) o_7945_不透明.clone();
-        _7946_半透明 = (Image) o_7946_半透明.clone();
-        _7947_半透明 = (Image) o_7947_半透明.clone();
-        _7948_半透明 = (Image) o_7948_半透明.clone();
-        _7949_不透明 = (Image) o_7949_不透明.clone();
-
-        System.out.println(System.currentTimeMillis());
-
-//        _7945_不透明 = new Image(_DSC7945_不透明);
-//        _7946_半透明 = new Image(_DSC7946_半透明);
-//        _7947_半透明 = new Image(_DSC7947_半透明);
-//        _7948_半透明 = new Image(_DSC7948_半透明);
-//        _7949_不透明 = new Image(_DSC7949_不透明);
 
 
         _7947_半透明.blend(_7945_不透明, 1.0);
@@ -112,8 +111,8 @@ public class Image implements Cloneable {
         w.writeUpdated(_7947_半透明, folder, true);
 //        Image _7947_半透明2 = _DSC7947_半透明.getImage();
 //        Image _7947_半透明2 = (Image) o_7947_半透明.clone();
-//        _7947_半透明 = new Image(_DSC7947_半透明);
-        _7947_半透明 = (Image) o_7947_半透明.clone();
+//        _7947_半透明 = (Image) o_7947_半透明.clone();
+        _7947_半透明 = new Image(_DSC7947_半透明);
 
         System.out.println(System.currentTimeMillis());
 
@@ -123,8 +122,8 @@ public class Image implements Cloneable {
         w.writeUpdated(_7949_不透明, folder, true);
 //        Image _7949_不透明2 = _DSC7949_不透明.getImage();
 //        Image _7949_不透明2 = (Image) o_7949_不透明.clone();
-//        _7949_不透明 = new Image(_DSC7949_不透明);
-        _7949_不透明 = (Image) o_7949_不透明.clone();
+//        _7949_不透明 = (Image) o_7949_不透明.clone();
+        _7949_不透明 = new Image(_DSC7949_不透明);
 
         System.out.println(System.currentTimeMillis());
 
@@ -134,9 +133,8 @@ public class Image implements Cloneable {
         w.writeUpdated(_7945_不透明, folder, true);
 //        Image _7945_不透明2 = _DSC7945_不透明.getImage();
 //        Image _7945_不透明2 = (Image) o_7945_不透明.clone();
-        _7945_不透明 = (Image) o_7945_不透明.clone();
-//        _7945_不透明 = new Image(_DSC7945_不透明);
-//        _7945_不透明 = new Image(new File(folder + "_DSC7945.png"));
+//        _7945_不透明 = (Image) o_7945_不透明.clone();
+        _7945_不透明 = new Image(_DSC7945_不透明);
 
         System.out.println(System.currentTimeMillis());
 
@@ -147,9 +145,8 @@ public class Image implements Cloneable {
         w.writeUpdated(_7945_不透明, folder, true);
 //        Image _7945_不透明3 = _DSC7945_不透明.getImage();
 //        Image _7945_不透明3 = (Image) o_7945_不透明.clone();
-        _7945_不透明 = (Image) o_7945_不透明.clone();
-//        _7945_不透明 = new Image(_DSC7945_不透明);
-//        _7945_不透明 = new Image(new File(folder + "_DSC7945.png"));
+//        _7945_不透明 = (Image) o_7945_不透明.clone();
+        _7945_不透明 = new Image(_DSC7945_不透明);
 
         System.out.println(System.currentTimeMillis());
 
@@ -159,9 +156,8 @@ public class Image implements Cloneable {
         w.writeUpdated(_7945_不透明, folder, true);
 //        Image _7945_不透明4 = _DSC7945_不透明.getImage();
 //        Image _7945_不透明4 = (Image) o_7945_不透明.clone();
-        _7945_不透明 = (Image) o_7945_不透明.clone();
-//        _7945_不透明 = new Image(_DSC7945_不透明);
-//        _7945_不透明 = new Image(new File(folder + "_DSC7945.png"));
+//        _7945_不透明 = (Image) o_7945_不透明.clone();
+        _7945_不透明 = new Image(_DSC7945_不透明);
 
         System.out.println(System.currentTimeMillis());
 
@@ -171,9 +167,8 @@ public class Image implements Cloneable {
         w.writeUpdated(_7947_半透明, folder, true);
 //        Image _7947_半透明3 = _DSC7947_半透明.getImage();
 //        Image _7947_半透明3 = (Image) o_7947_半透明.clone();
-        _7947_半透明 = (Image) o_7947_半透明.clone();
-//        _7947_半透明 = new Image(_DSC7947_半透明);
-//        _7947_半透明 = new Image(new File(folder + "_DSC7947.png"));
+//        _7947_半透明 = (Image) o_7947_半透明.clone();
+        _7947_半透明 = new Image(_DSC7947_半透明);
 
         System.out.println(System.currentTimeMillis());
 
@@ -183,9 +178,8 @@ public class Image implements Cloneable {
         w.writeUpdated(_7947_半透明, folder, true);
 //        Image _7947_半透明4 = _DSC7947_半透明.getImage();
 //        Image _7947_半透明4 = (Image) o_7947_半透明.clone();
-        _7947_半透明 = (Image) o_7947_半透明.clone();
-//        _7947_半透明 = new Image(_DSC7947_半透明);
-//        _7947_半透明 = new Image(new File(folder + "_DSC7947.png"));
+//        _7947_半透明 = (Image) o_7947_半透明.clone();
+        _7947_半透明 = new Image(_DSC7947_半透明);
 
         System.out.println(System.currentTimeMillis());
 
@@ -195,9 +189,8 @@ public class Image implements Cloneable {
         w.writeUpdated(_7947_半透明, folder, true);
 //        Image _7947_半透明5 = _DSC7947_半透明.getImage();
 //        Image _7947_半透明5 = (Image) o_7947_半透明.clone();
-        _7947_半透明 = (Image) o_7947_半透明.clone();
-//        _7947_半透明 = new Image(_DSC7947_半透明);
-//        _7947_半透明 = new Image(new File(folder + "_DSC7947.png"));
+//        _7947_半透明 = (Image) o_7947_半透明.clone();
+        _7947_半透明 = new Image(_DSC7947_半透明);
 
         System.out.println(System.currentTimeMillis());
 
@@ -208,9 +201,8 @@ public class Image implements Cloneable {
         w.writeUpdated(_7946_半透明, folder, true);
 //        Image _7946_半透明2 = _DSC7946_半透明.getImage();
 //        Image _7946_半透明2 = (Image) o_7946_半透明.clone();
-        _7946_半透明 = (Image) o_7946_半透明.clone();
-//        _7946_半透明 = new Image(_DSC7946_半透明);
-//        _7946_半透明 = new Image(new File(folder + "_DSC7946.png"));
+//        _7946_半透明 = (Image) o_7946_半透明.clone();
+        _7946_半透明 = new Image(_DSC7946_半透明);
 
         System.out.println(System.currentTimeMillis());
 
