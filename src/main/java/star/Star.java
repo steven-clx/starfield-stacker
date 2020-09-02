@@ -1,5 +1,6 @@
-package image;
+package star;
 
+import image.Pixel;
 import util.ListUtil;
 import util.MathUtil;
 
@@ -89,12 +90,13 @@ public class Star {
     public void merge(Star other, Segment link) {
 
         ListUtil.mergeList(segments, other.segments, (ths, oth) -> {
+
             int compareY = Integer.compare(ths.getY(), oth.getY());
-            if (compareY == 0) {
+
+            if (compareY == 0)
                 return Integer.compare(ths.getLeft(), oth.getLeft());
-            } else {
+            else
                 return compareY;
-            }
         });
 
         for (Segment segment : other.segments)

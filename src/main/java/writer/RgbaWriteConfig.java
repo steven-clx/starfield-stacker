@@ -1,5 +1,6 @@
 package writer;
 
+
 /**
  * RgbaWriteConfig is a configuration for exporting an image with alpha channel
  *

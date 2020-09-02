@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
 
-public class Main {
+public class MiscTest {
 
     private static Map<Integer, String> typeMap;
     private static Map<String, BufferedImage> imageMap;
@@ -175,7 +175,7 @@ public class Main {
         for (String f : files)
             imageMap.put(f, ImageIO.read(new File(dir + f)));
 
-//        files.forEach(Main::printImageMode);
+//        files.forEach(MiscTest::printImageMode);
 
         BufferedImage bi = ImageIO.read(new File(dir + "RGB-8副本.jpg"));
         System.out.println(getPixelDetailsByColorModel(bi, x1, y1));
@@ -374,10 +374,10 @@ public class Main {
         WritableRaster wr = bi.getRaster();
         Object dataElement = wr.getDataElements(x, y, null);
 
-        int a = cm.getAlpha(dataElement);
-        int r = cm.getRed(dataElement);
-        int g = cm.getGreen(dataElement);
-        int b = cm.getBlue(dataElement);
+        int a = cm.getAlpha (dataElement);
+        int r = cm.getRed   (dataElement);
+        int g = cm.getGreen (dataElement);
+        int b = cm.getBlue  (dataElement);
         int pixel = bi.getRGB(x, y);
 
         return "(" + pixel + ", " + a + ", " + r + ", " + g + ", " + b + ")";

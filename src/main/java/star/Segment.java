@@ -1,4 +1,4 @@
-package image;
+package star;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,15 +49,15 @@ public class Segment {
      *
      * @param firstPixel the first star pixel encountered when scanning from left to right
      */
-    public Segment(StarPixel firstPixel) {
+    public Segment(StarPixel firstPixel, int x, int y) {
 
         pixels = new ArrayList<>();
         pixels.add(firstPixel);
 
         firstPixel.setSegment(this);
 
-        y = firstPixel.getY();
-        left = firstPixel.getX();
+        this.y = (short) y;
+        left = (short) x;
         right = left;
     }
 
@@ -68,10 +68,10 @@ public class Segment {
      *
      * @param newPixel the next encountered star pixel in the segment (only if next to the previous one)
      */
-    public void addPixel(StarPixel newPixel) {
+    public void addPixel(StarPixel newPixel, int x) {
         pixels.add(newPixel);
         newPixel.setSegment(this);
-        right = newPixel.getX();
+        right = (short) x;
     }
 
 

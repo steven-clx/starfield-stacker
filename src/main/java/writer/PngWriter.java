@@ -59,12 +59,12 @@ public class PngWriter implements Writer {
 
     /**
      * If the input image does not contain the alpha channel, or it does and the write configuration
-     * saves the alpha channel, the BufferedImage of the input image will be used for the export;
+     * saves the alpha channel, the input image will render a default BufferedImage for the export;
      * otherwise, the alpha channel should be either multiplied to the r, g, b channels or discarded,
-     * according to the configuration.
+     * according to the configuration
      *
      * If the input image contains the alpha channel, but the supplied write configuration is not
-     * intended for image with alpha channel, the default instance of RgbaPngWriteConfig will be used.
+     * intended for image with alpha channel, the default instance of RgbaPngWriteConfig will be used
      */
     @Override
     public void write(Image image, String outputDir, boolean isSuffixIncluded) {
@@ -74,36 +74,36 @@ public class PngWriter implements Writer {
 
         if (!image.hasAlpha()) {
 
-            exportedBufferedImage = image.getBufferedImage();
+            exportedBufferedImage = image.render();
             appliedConfig = config instanceof RgbPngWriteConfig ? config : RgbPngWriteConfig.DEFAULT;
 
         } else if (image.hasAlpha() &&
                 config instanceof RgbaWriteConfig &&
                 ((RgbaWriteConfig) config).isAlphaSaved) {
 
-            exportedBufferedImage = image.getBufferedImage();
+            exportedBufferedImage = image.render();
             appliedConfig = config;
 
         } else {
 
             appliedConfig = config instanceof RgbaWriteConfig ? config : RgbaPngWriteConfig.DEFAULT;
 
-            if (((RgbaWriteConfig) appliedConfig).isAlphaMultiplied) {
+            if (((RgbaWriteConfig) appliedConfig).isAlphaMultiplied)
                 exportedBufferedImage = image.renderAlphaMultipliedImage();
-            } else {
+            else
                 exportedBufferedImage = image.renderAlphaDiscardedImage();
-            }
         }
-
-        File file = new File(outputDir +
-                (outputDir.endsWith(File.separator) ? "" : File.separatorChar) +
-                image.getFileName() +
-                (isSuffixIncluded ? appliedConfig.getSuffix() : "") +
-                ".png");
 
         try {
 
-            FileImageOutputStream stream = new FileImageOutputStream(file);
+            String canonicalDir = getCanonicalDir(outputDir);
+
+            FileImageOutputStream stream = new FileImageOutputStream(
+                    new File(canonicalDir +
+                            (canonicalDir.length() == 0 || canonicalDir.endsWith(File.separator) ? "" : File.separator) +
+                            image.getFileName() +
+                            (isSuffixIncluded ? appliedConfig.getSuffix() : "") +
+                            ".png"));
 
             imageWriter.setOutput(stream);
             imageWriter.write(new IIOImage(exportedBufferedImage, null, null));
@@ -156,11 +156,13 @@ public class PngWriter implements Writer {
      * @return the default instance
      */
     static PngWriter resetAndGet() {
-        if (instance == null) {
+
+        if (instance == null)
             instance = new PngWriter();
-        } else {
+
+        else
             instance.initFromDefaultConfig();
-        }
+
         return instance;
     }
 

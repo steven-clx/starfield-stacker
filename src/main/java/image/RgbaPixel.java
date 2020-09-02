@@ -1,7 +1,7 @@
 package image;
 
-
 import util.MathUtil;
+
 
 /**
  * A pixel with 8-bit RGBA channels in byte type
@@ -11,12 +11,12 @@ import util.MathUtil;
 public class RgbaPixel extends RgbPixel implements Pixel {
 
 
-    byte a;
+    public byte a;
 
 
 
     public RgbaPixel() {
-        this.a = 0x7f;
+        this.a = 127;
     }
 
 
@@ -28,18 +28,11 @@ public class RgbaPixel extends RgbPixel implements Pixel {
     }
 
 
-    public RgbaPixel(int x, int y) {
-        super(x, y);
-    }
-
-
     public RgbaPixel(int r, int g, int b, int a, int x, int y) {
         this.r = (byte) r;
         this.g = (byte) g;
         this.b = (byte) b;
         this.a = (byte) a;
-        this.x = (short) x;
-        this.y = (short) y;
     }
 
 
@@ -48,8 +41,6 @@ public class RgbaPixel extends RgbPixel implements Pixel {
         g = other.g;
         b = other.b;
         a = other.a;
-        x = other.x;
-        y = other.y;
     }
 
 
@@ -66,34 +57,20 @@ public class RgbaPixel extends RgbPixel implements Pixel {
         return a & 0xff;
     }
 
-
-
     @Override
     public int getEncoded() {
-        return ((a & 0xff) << 24) | super.getEncoded();
-    }
-
-    @Override
-    public int getEncodedRGB() {
-        return super.getEncoded();
+        return (a & 0xff) << 24 | (r & 0xff) << 16 | (g & 0xff) << 8 | (b & 0xff);
     }
 
     @Override
     public int getEncodedRGBA() {
-        return ((a & 0xff) << 24) | super.getEncoded();
+        return (a & 0xff) << 24 | (r & 0xff) << 16 | (g & 0xff) << 8 | (b & 0xff);
     }
 
     @Override
     public int getEncodedAlphaMultipliedRGB() {
-        int a = getA();
-        int addend = 255 - a;
-        double multiplier = a / 255d;
-        return (int) ((Math.round(addend + getR() * multiplier) << 16) |
-                      (Math.round(addend + getG() * multiplier) << 8)  |
-                      (Math.round(addend + getB() * multiplier)));
+        return MathUtil.multiplyAlpha(getR(), getG(), getB(), getA());
     }
-
-
 
     @Override
     public void setA(int a) {
@@ -102,53 +79,48 @@ public class RgbaPixel extends RgbPixel implements Pixel {
 
     @Override
     public void setRGBA(int r, int g, int b, int a) {
-        super.setRGB(r, g, b);
+        this.r = (byte) r;
+        this.g = (byte) g;
+        this.b = (byte) b;
         this.a = (byte) a;
     }
 
-
-
     @Override
-    public void setMaxCheckedA(int a) {
-        this.a = (byte) Math.min(255, a);
-    }
-
-    @Override
-    public void setMinCheckedA(int a) {
-        this.a = (byte) Math.max(0, a);
+    public void setEncoded(int encoded) {
+        a = (byte) (encoded >>> 24);
+        r = (byte) ((encoded >> 16) & 0xff);
+        g = (byte) ((encoded >> 8)  & 0xff);
+        b = (byte) (encoded         & 0xff);
     }
 
 
 
     @Override
-    public void setCodedInt(int codedInt) {
-        super.setCodedInt(codedInt);
-        this.a = (byte) ((codedInt >> 24) & 0xff);
+    public void blend(RgbPixel other, float opacity) {
+        float a1 = (a & 0xff) / 255f;
+        float a12 = MathUtil.blendAlpha(a1, opacity);
+        r = (byte) MathUtil.blend(r & 0xff, other.r & 0xff, a1, opacity, a12);
+        g = (byte) MathUtil.blend(g & 0xff, other.g & 0xff, a1, opacity, a12);
+        b = (byte) MathUtil.blend(b & 0xff, other.b & 0xff, a1, opacity, a12);
+        a = (byte) Math.round(a12 * 255);
     }
 
-
-
     @Override
-    public void blend(RgbPixel other, double opacity) {
-        double a1 = getA() / 255d;
-        double a12 = MathUtil.blendAlpha(a1, opacity);
-        setR(MathUtil.blend(getR(), other.getR(), a1, opacity, a12));
-        setG(MathUtil.blend(getG(), other.getG(), a1, opacity, a12));
-        setB(MathUtil.blend(getB(), other.getB(), a1, opacity, a12));
-        setA((int) Math.round(a12 * 255));
-    }
-
-
-    @Override
-    public void blend(RgbaPixel other, double opacity) {
-        blend((RgbPixel) other, MathUtil.computeCompositeAlpha(other, opacity));
+    public void blend(RgbaPixel other, float opacity) {
+        float compositeAlpha = MathUtil.computeCompositeAlpha(other.a & 0xff, opacity);
+        float a1 = (a & 0xff) / 255f;
+        float a12 = MathUtil.blendAlpha(a1, compositeAlpha);
+        r = (byte) MathUtil.blend(r & 0xff, other.r & 0xff, a1, compositeAlpha, a12);
+        g = (byte) MathUtil.blend(g & 0xff, other.g & 0xff, a1, compositeAlpha, a12);
+        b = (byte) MathUtil.blend(b & 0xff, other.b & 0xff, a1, compositeAlpha, a12);
+        a = (byte) Math.round(a12 * 255);
     }
 
 
 
     @Override
     public String toString() {
-        return String.format("RGBA(%d, %d, %d, %.2f)", getR(), getG(), getB(), getA() / 255d);
+        return String.format("RGBA(%d, %d, %d, %.2f)", getR(), getG(), getB(), getA() / 255f);
     }
 
 }

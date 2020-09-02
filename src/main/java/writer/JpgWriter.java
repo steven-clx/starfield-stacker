@@ -70,18 +70,19 @@ public class JpgWriter implements Writer {
     @Override
     public void write(Image image, String outputDir, boolean isSuffixIncluded) {
 
-        File f = new File(outputDir +
-                (outputDir.endsWith("/") ? "" : File.separatorChar) +
-                image.getFileName() +
-                (isSuffixIncluded ? config.getSuffix() : "") +
-                ".jpg");
-
         try {
 
-            FileImageOutputStream stream = new FileImageOutputStream(f);
+            String canonicalDir = getCanonicalDir(outputDir);
+
+            FileImageOutputStream stream = new FileImageOutputStream(
+                    new File(canonicalDir +
+                            (canonicalDir.endsWith(File.separator) ? "" : File.separator) +
+                            image.getFileName() +
+                            (isSuffixIncluded ? config.getSuffix() : "") +
+                            ".jpg"));
 
             imageWriter.setOutput(stream);
-            imageWriter.write(null, new IIOImage(image.getBufferedImage(), null, null), param);
+            imageWriter.write(null, new IIOImage(image.renderAlphaMultipliedImage(), null, null), param);
 
             stream.close();
 
@@ -132,11 +133,13 @@ public class JpgWriter implements Writer {
      * @return the default instance
      */
     static JpgWriter resetAndGet() {
-        if (instance == null) {
+
+        if (instance == null)
             instance = new JpgWriter();
-        } else {
+
+        else
             instance.initFromDefaultConfig();
-        }
+
         return instance;
     }
 

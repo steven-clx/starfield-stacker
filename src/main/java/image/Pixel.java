@@ -9,11 +9,7 @@ public interface Pixel {
     int getB();
     int getA();
 
-    short getX();
-    short getY();
-
     int getEncoded();
-    int getEncodedRGB();
     int getEncodedRGBA();
     int getEncodedAlphaMultipliedRGB();
 
@@ -23,23 +19,11 @@ public interface Pixel {
     void setG(int g);
     void setB(int b);
     void setA(int a);
+
     void setRGB(int r, int g, int b);
     void setRGBA(int r, int g, int b, int a);
 
-    void setMaxCheckedR(int r);
-    void setMaxCheckedG(int g);
-    void setMaxCheckedB(int b);
-    void setMaxCheckedA(int a);
-
-    void setMinCheckedR(int r);
-    void setMinCheckedG(int g);
-    void setMinCheckedB(int b);
-    void setMinCheckedA(int a);
-
-    void setX(int x);
-    void setY(int y);
-    void setXY(int x, int y);
-
-    void setCodedInt(int codedInt);
+    void setEncoded(int encoded);
+    void setEncodedRGB(int encodedRGB);
 
 }

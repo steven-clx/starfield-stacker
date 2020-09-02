@@ -1,7 +1,7 @@
 package image;
 
-
 import util.MathUtil;
+
 
 /**
  * A pixel with 8-bit RGB channels in byte type
@@ -11,8 +11,7 @@ import util.MathUtil;
 public class RgbPixel implements Pixel {
 
 
-    byte r, g, b;
-    short x, y;
+    public byte r, g, b;
 
 
 
@@ -26,27 +25,10 @@ public class RgbPixel implements Pixel {
     }
 
 
-    public RgbPixel(int x, int y) {
-        this.x = (short) x;
-        this.y = (short) y;
-    }
-
-
-    public RgbPixel(int r, int g, int b, int x, int y) {
-        this.r = (byte) r;
-        this.g = (byte) g;
-        this.b = (byte) b;
-        this.x = (short) x;
-        this.y = (short) y;
-    }
-
-
     public RgbPixel(RgbPixel other) {
         r = other.r;
         g = other.g;
         b = other.b;
-        x = other.x;
-        y = other.y;
     }
 
 
@@ -79,43 +61,24 @@ public class RgbPixel implements Pixel {
     }
 
     @Override
-    public short getX() {
-        return x;
-    }
-
-    @Override
-    public short getY() {
-        return y;
-    }
-
-
-
-    @Override
     public int getEncoded() {
-        return ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff);
-    }
-
-    @Override
-    public int getEncodedRGB() {
-        return ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff);
+        return (r & 0xff) << 16 | (g & 0xff) << 8 | (b & 0xff);
     }
 
     @Override
     public int getEncodedRGBA() {
-        return -16777216 | ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff);
+        return -16777216 | (r & 0xff) << 16 | (g & 0xff) << 8 | (b & 0xff);
     }
 
     @Override
     public int getEncodedAlphaMultipliedRGB() {
-        return ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff);
+        return -16777216 | (r & 0xff) << 16 | (g & 0xff) << 8 | (b & 0xff);
     }
 
     @Override
     public int getBrightness() {
         return Math.round(((r & 0xff) + (g & 0xff) + (b & 0xff)) / 3f);
     }
-
-
 
     @Override
     public void setR(int r) {
@@ -149,84 +112,33 @@ public class RgbPixel implements Pixel {
         this.b = (byte) b;
     }
 
-
-
     @Override
-    public void setMaxCheckedR(int r) {
-        this.r = (byte) Math.min(255, r);
+    public void setEncoded(int encoded) {
+        r = (byte) ((encoded >> 16) & 0xff);
+        g = (byte) ((encoded >> 8)  & 0xff);
+        b = (byte) (encoded         & 0xff);
     }
 
     @Override
-    public void setMaxCheckedG(int g) {
-        this.g = (byte) Math.min(255, g);
-    }
-
-    @Override
-    public void setMaxCheckedB(int b) {
-        this.b = (byte) Math.min(255, b);
-    }
-
-    @Override
-    public void setMaxCheckedA(int a) {}
-
-
-
-    @Override
-    public void setMinCheckedR(int r) {
-        this.r = (byte) Math.max(0, r);
-    }
-
-    @Override
-    public void setMinCheckedG(int g) {
-        this.g = (byte) Math.max(0, g);
-    }
-
-    @Override
-    public void setMinCheckedB(int b) {
-        this.b = (byte) Math.max(0, b);
-    }
-
-    @Override
-    public void setMinCheckedA(int a) {}
-
-
-
-    @Override
-    public void setX(int x) {
-        this.x = (short) x;
-    }
-
-    @Override
-    public void setY(int y) {
-        this.y = (short) y;
-    }
-
-    @Override
-    public void setXY(int x, int y) {
-        this.x = (short) x;
-        this.y = (short) y;
+    public void setEncodedRGB(int encodedRGB) {
+        r = (byte) ((encodedRGB >> 16) & 0xff);
+        g = (byte) ((encodedRGB >> 8)  & 0xff);
+        b = (byte) (encodedRGB         & 0xff);
     }
 
 
 
-    @Override
-    public void setCodedInt(int codedInt) {
-        this.r = (byte) ((codedInt >> 16) & 0xff);
-        this.g = (byte) ((codedInt >> 8)  & 0xff);
-        this.b = (byte) (codedInt         & 0xff);
+    public void blend(RgbPixel other, float opacity) {
+        r = (byte) MathUtil.blend(r & 0xff, other.r & 0xff, opacity);
+        g = (byte) MathUtil.blend(g & 0xff, other.g & 0xff, opacity);
+        b = (byte) MathUtil.blend(b & 0xff, other.b & 0xff, opacity);
     }
 
-
-
-    public void blend(RgbPixel other, double opacity) {
-        setR(MathUtil.blend(getR(), other.getR(), opacity));
-        setG(MathUtil.blend(getG(), other.getG(), opacity));
-        setB(MathUtil.blend(getB(), other.getB(), opacity));
-    }
-
-
-    public void blend(RgbaPixel other, double opacity) {
-        blend((RgbPixel) other, MathUtil.computeCompositeAlpha(other, opacity));
+    public void blend(RgbaPixel other, float opacity) {
+        float compositeAlpha = MathUtil.computeCompositeAlpha(other.a & 0xff, opacity);
+        r = (byte) MathUtil.blend(r & 0xff, other.r & 0xff, compositeAlpha);
+        g = (byte) MathUtil.blend(g & 0xff, other.g & 0xff, compositeAlpha);
+        b = (byte) MathUtil.blend(b & 0xff, other.b & 0xff, compositeAlpha);
     }
 
 
