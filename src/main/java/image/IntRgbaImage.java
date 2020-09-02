@@ -88,7 +88,7 @@ public class IntRgbaImage extends IntRgbImage implements Image {
 
         BufferedImage rendered = new BufferedImage(width, height, DEFAULT_TYPE_RGB);
 
-        for (int i = 0; i < dataLength; i++)  // TODO
+        for (int i = 0; i < dataLength; i++)
             rendered.setRGB(i % width, i / width, MathUtil.multiplyAlpha(data[i]));
 
         return rendered;

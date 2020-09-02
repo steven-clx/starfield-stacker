@@ -246,7 +246,7 @@ public class IntRgbImage extends AbstractImage implements Image {
 
         BufferedImage rendered = new BufferedImage(width, height, type);
 
-        for (int i = 0; i < dataLength; i++)  // TODO
+        for (int i = 0; i < dataLength; i++)
             rendered.setRGB(i % width, i / width, data[i]);
 
         return rendered;

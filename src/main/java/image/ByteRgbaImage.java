@@ -124,7 +124,7 @@ public class ByteRgbaImage extends ByteRgbImage implements Image {
 
         BufferedImage rendered = new BufferedImage(width, height, DEFAULT_TYPE_RGB);
 
-        for (int i = 0; i < dataLength; i++)  // TODO
+        for (int i = 0; i < dataLength; i++)
             rendered.setRGB(i % width, i / width, MathUtil.multiplyAlpha(rs[i] & 0xff, gs[i] & 0xff, bs[i] & 0xff, as[i] & 0xff));
 
         return rendered;
@@ -141,7 +141,7 @@ public class ByteRgbaImage extends ByteRgbImage implements Image {
 
         BufferedImage rendered = new BufferedImage(width, height, type);
 
-        for (int i = 0; i < dataLength; i++)  // TODO
+        for (int i = 0; i < dataLength; i++)
             rendered.setRGB(i % width, i / width, (as[i] & 0xff) << 24 | (rs[i] & 0xff) << 16 | (gs[i] & 0xff) << 8 | (bs[i] & 0xff));
 
         return rendered;

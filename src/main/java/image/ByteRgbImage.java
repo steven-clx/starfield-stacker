@@ -279,7 +279,7 @@ public class ByteRgbImage extends AbstractImage implements Image {
 
         BufferedImage rendered = new BufferedImage(width, height, type);
 
-        for (int i = 0; i < dataLength; i++)  // TODO
+        for (int i = 0; i < dataLength; i++)
             rendered.setRGB(i % width, i / width, (rs[i] & 0xff) << 16 | (gs[i] & 0xff) << 8 | bs[i] & 0xff);
 
         return rendered;
