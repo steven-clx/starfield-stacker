@@ -61,11 +61,13 @@ public class ImageReader {
                               ? file.getParentFile()
                               : canonicalFile.getParentFile();
 
-            // Try to get the canonical file of the parent file
-            try {
-                canonicalParentFile = parentFile.getCanonicalFile();
-            } catch (IOException e) {
-                e.printStackTrace();
+            // Try to get the canonical file of the parent file if it exists
+            if (parentFile != null) {
+                try {
+                    canonicalParentFile = parentFile.getCanonicalFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             /*

@@ -33,7 +33,7 @@ public class FileIOTest {
         ImageReader r = ImageReader.getInstance();
         r.setDataType(DataType.INT);
 
-        Image image = r.read(new File(""));
+        Image image = r.read(new File("/"));
 
         WriteConfig wc = RgbaPngWriteConfig.DEFAULT;
         Writer w = WriterDispatcher.getWriter(wc);
