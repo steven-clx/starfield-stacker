@@ -47,8 +47,8 @@ public interface Writer {
 
 
     /**
-     * Check if the parent directory of the destination file exists, and return the canonical path to that directory
-     * If it doesn't, create one or throw IOException if it cannot be created
+     * Get the canonical path to the parent directory of the destination file. If the directory doesn't
+     * exist, create one or throw IOException if it cannot be created
      *
      * @param outputDir the parent directory of the destination file where the image will be written to
      * @return the canonical path to the parent directory of the destination file

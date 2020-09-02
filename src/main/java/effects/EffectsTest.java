@@ -28,12 +28,17 @@ public class EffectsTest {
         int start = 7947;
         int end = 8054;
 
-        Image base = r.read(new File("/Volumes/Backup Plus/2020 Perseids/jpg/all/_DSC" + start + ".jpg"));
+        String folder = "/Volumes/Backup Plus/2020 Perseids/all_jpg/";
+        String filePref = "_DSC";
+
+        String pathPref = folder + filePref;
+
+        Image base = r.read(new File(pathPref + start + ".jpg"));
 
         for (int i = start + 1; i <= end; i++) {
             Brighten.brighten(
                     base,
-                    r.read(new File("/Volumes/Backup Plus/2020 Perseids/jpg/all/_DSC" + i + ".jpg")),
+                    r.read(new File(pathPref + i + ".jpg")),
                     Brighten.calculateOpacity(i - start, end - start + 1, 0.7f, 0.16f));
         }
 
