@@ -2,9 +2,6 @@ package writer;
 
 import image.Image;
 
-import java.io.File;
-import java.io.IOException;
-
 
 /**
  * An interface for writing an image into an output file using different WriteConfig configurations
@@ -42,32 +39,6 @@ public interface Writer {
      */
     default void write(Image image, boolean isSuffixIncluded) {
         write(image, image.getDirectory(), isSuffixIncluded);
-    }
-
-
-    /**
-     * Get the canonical path to the parent directory of the destination file. If the directory doesn't
-     * exist, create one or throw IOException if it cannot be created
-     *
-     * @param outputDir the parent directory of the destination file where the image will be written to
-     * @return the canonical path to the parent directory of the destination file
-     * @throws IOException thrown if the output directory is invalid,
-     *                     or if the parent directory does not exist and cannot be created
-     */
-    default String getCanonicalDir(String outputDir) throws IOException {
-
-        File canonicalDir = new File(outputDir).getCanonicalFile();
-        String canonicalPath = canonicalDir.getCanonicalPath();
-
-        if (canonicalDir.exists()) {
-            if (canonicalDir.isFile())
-                throw new IOException("cannot write image into directory: " + canonicalPath);
-        } else {
-            if (!canonicalDir.mkdirs())
-                throw new IOException("cannot create folder at: " + canonicalPath);
-        }
-
-        return canonicalPath;
     }
 
 }

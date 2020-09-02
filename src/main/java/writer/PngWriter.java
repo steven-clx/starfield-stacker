@@ -1,6 +1,7 @@
 package writer;
 
 import image.Image;
+import util.FileUtil;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -96,7 +97,7 @@ public class PngWriter implements Writer {
 
         try {
 
-            String canonicalDir = getCanonicalDir(outputDir);
+            String canonicalDir = FileUtil.getCanonicalDir(outputDir);
 
             FileImageOutputStream stream = new FileImageOutputStream(
                     new File(canonicalDir +
