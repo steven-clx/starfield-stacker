@@ -1,5 +1,6 @@
 package image;
 
+import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -30,15 +31,20 @@ public class ImageReader {
 
         try {
 
-            if (parentFile.isDirectory()) {
-
+            if (parentFile != null && parentFile.isDirectory())
                 directory = parentFile.getCanonicalPath();
+            else
+                throw new IOException("cannot get parent folder of file at path: " + file.getAbsolutePath());
 
-                BufferedImage bi = ImageIO.read(file);
+            if (file.isDirectory())
+                throw new IOException("cannot read file at path: " + file.getAbsolutePath());
 
-                if (bi != null)
-                    image = imageCreator.createImage(bi, fileName, directory);
-            }
+            BufferedImage bi = ImageIO.read(file);
+
+            if (bi != null)
+                image = imageCreator.createImage(bi, fileName, directory);
+            else
+                throw new IIOException("cannot read input image at: " + file.getAbsolutePath());
 
         } catch (Exception e) {
 

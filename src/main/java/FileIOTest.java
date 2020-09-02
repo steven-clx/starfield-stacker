@@ -33,7 +33,7 @@ public class FileIOTest {
         ImageReader r = ImageReader.getInstance();
         r.setDataType(DataType.INT);
 
-        Image image = r.read(new File("/Users/steven/Downloads/random_image_as.png"));
+        Image image = r.read(new File("/Users/steven/Downloads/../Downloads/12-3月翻译"));
 
         WriteConfig wc = RgbaPngWriteConfig.DEFAULT;
         Writer w = WriterDispatcher.getWriter(wc);

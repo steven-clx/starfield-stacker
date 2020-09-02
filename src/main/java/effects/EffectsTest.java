@@ -44,7 +44,6 @@ public class EffectsTest {
 
         w.write(base, true);
 
-
         TestUtil.printTimeInfo();
         TestUtil.printMemoryInfo();
     }
