@@ -12,7 +12,7 @@ public class IntRgbImage extends AbstractImage implements Image {
 
 
 
-    IntRgbImage(BufferedImage bi, String fileName, String directory) {
+    public IntRgbImage(BufferedImage bi, String fileName, String directory) {
 
         super(fileName, directory);
 
@@ -33,7 +33,7 @@ public class IntRgbImage extends AbstractImage implements Image {
     }
 
 
-    IntRgbImage(int width, int height) {
+    public IntRgbImage(int width, int height) {
 
         super();
 

@@ -1,7 +1,7 @@
-import image.ByteImageCreator;
-import image.DataType;
+import reader.ByteImageCreator;
+import reader.DataType;
 import image.Image;
-import image.ImageReader;
+import reader.ImageReader;
 import writer.RgbaPngWriteConfig;
 import writer.WriteConfig;
 import writer.Writer;

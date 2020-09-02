@@ -1,6 +1,8 @@
 package image;
 
 import effects.algorithm.Blend;
+import reader.DataType;
+import reader.ImageReader;
 import writer.RgbaPngWriteConfig;
 import writer.WriteConfig;
 import writer.Writer;

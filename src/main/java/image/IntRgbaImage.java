@@ -8,11 +8,11 @@ import java.awt.image.BufferedImage;
 public class IntRgbaImage extends IntRgbImage implements Image {
 
 
-    IntRgbaImage(BufferedImage bi, String fileName, String directory) {
+    public IntRgbaImage(BufferedImage bi, String fileName, String directory) {
         super(bi, fileName, directory);
     }
 
-    IntRgbaImage(int width, int height) {
+    public IntRgbaImage(int width, int height) {
         super(width, height);
     }
 

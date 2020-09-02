@@ -1,9 +1,9 @@
 package effects;
 
 import effects.algorithm.Brighten;
-import image.DataType;
+import reader.DataType;
 import image.Image;
-import image.ImageReader;
+import reader.ImageReader;
 import util.TestUtil;
 import writer.RgbaPngWriteConfig;
 import writer.WriteConfig;

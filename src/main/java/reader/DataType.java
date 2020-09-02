@@ -1,4 +1,4 @@
-package image;
+package reader;
 
 public enum DataType {
 

@@ -14,11 +14,11 @@ public class ByteRgbaImage extends ByteRgbImage implements Image {
 
 
 
-    ByteRgbaImage(BufferedImage bi, String fileName, String directory) {
+    public ByteRgbaImage(BufferedImage bi, String fileName, String directory) {
         super(bi, fileName, directory);
     }
 
-    ByteRgbaImage(int width, int height) {
+    public ByteRgbaImage(int width, int height) {
         super(width, height);
     }
 

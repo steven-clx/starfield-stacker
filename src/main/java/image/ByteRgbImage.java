@@ -12,7 +12,7 @@ public class ByteRgbImage extends AbstractImage implements Image {
 
 
 
-    ByteRgbImage(BufferedImage bi, String fileName, String directory) {
+    public ByteRgbImage(BufferedImage bi, String fileName, String directory) {
 
         super(fileName, directory);
 
@@ -29,7 +29,7 @@ public class ByteRgbImage extends AbstractImage implements Image {
     }
 
 
-    ByteRgbImage(int width, int height) {
+    public ByteRgbImage(int width, int height) {
 
         super();
 

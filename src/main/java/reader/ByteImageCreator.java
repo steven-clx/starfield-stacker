@@ -1,4 +1,8 @@
-package image;
+package reader;
+
+import image.ByteRgbImage;
+import image.ByteRgbaImage;
+import image.Image;
 
 import java.awt.image.BufferedImage;
 

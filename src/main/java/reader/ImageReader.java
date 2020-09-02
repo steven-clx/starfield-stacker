@@ -1,5 +1,6 @@
-package image;
+package reader;
 
+import image.Image;
 import util.FileUtil;
 
 import javax.imageio.IIOException;
