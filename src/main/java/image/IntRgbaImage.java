@@ -84,19 +84,19 @@ public class IntRgbaImage extends IntRgbImage implements Image {
 
 
     @Override
-    public BufferedImage renderAlphaMultipliedImage() {
+    public BufferedImage renderAlphaMultiplied() {
 
         BufferedImage rendered = new BufferedImage(width, height, DEFAULT_TYPE_RGB);
 
-        for (int i = 0; i < dataLength; i++)
+        for (int i = 0; i < dataLength; i++)  // TODO
             rendered.setRGB(i % width, i / width, MathUtil.multiplyAlpha(data[i]));
 
         return rendered;
     }
 
     @Override
-    public BufferedImage renderAlphaDiscardedImage() {
-        return dataToImage(DEFAULT_TYPE_RGB);
+    public BufferedImage renderAlphaDiscarded() {
+        return render(DEFAULT_TYPE_RGB);
     }
 
 

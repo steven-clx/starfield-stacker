@@ -283,37 +283,37 @@ public class PixelImage extends AbstractImage implements Image {
         BufferedImage rendered = new BufferedImage(width, height, type);
 
         if (hasAlpha)
-            for (int i = 0; i < dataLength; i++)
+            for (int i = 0; i < dataLength; i++)  // TODO
                 rendered.setRGB(i % width, i / width, pixels[i].getEncodedRGBA());
 
         else
-            for (int i = 0; i < dataLength; i++)
+            for (int i = 0; i < dataLength; i++)  // TODO
                 rendered.setRGB(i % width, i / width, pixels[i].getEncoded());
 
         return rendered;
     }
 
     @Override
-    public BufferedImage renderAlphaMultipliedImage() {
+    public BufferedImage renderAlphaMultiplied() {
 
         if (!hasAlpha) return render();
 
         BufferedImage rendered = new BufferedImage(width, height, DEFAULT_TYPE_RGB);
 
-        for (int i = 0; i < dataLength; i++)
+        for (int i = 0; i < dataLength; i++)  // TODO
             rendered.setRGB(i % width, i / width, pixels[i].getEncodedAlphaMultipliedRGB());
 
         return rendered;
     }
 
     @Override
-    public BufferedImage renderAlphaDiscardedImage() {
+    public BufferedImage renderAlphaDiscarded() {
 
         if (!hasAlpha) return render();
 
         BufferedImage rendered = new BufferedImage(width, height, DEFAULT_TYPE_RGB);
 
-        for (int i = 0; i < dataLength; i++)
+        for (int i = 0; i < dataLength; i++)  // TODO
             rendered.setRGB(i % width, i / width, pixels[i].getEncoded());
 
         return rendered;

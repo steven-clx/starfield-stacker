@@ -120,30 +120,31 @@ public class ByteRgbaImage extends ByteRgbImage implements Image {
 
 
     @Override
-    public BufferedImage renderAlphaMultipliedImage() {
+    public BufferedImage renderAlphaMultiplied() {
 
         BufferedImage rendered = new BufferedImage(width, height, DEFAULT_TYPE_RGB);
 
-        for (int i = 0; i < dataLength; i++)
+        for (int i = 0; i < dataLength; i++)  // TODO
             rendered.setRGB(i % width, i / width, MathUtil.multiplyAlpha(rs[i] & 0xff, gs[i] & 0xff, bs[i] & 0xff, as[i] & 0xff));
 
         return rendered;
     }
 
     @Override
-    public BufferedImage renderAlphaDiscardedImage() {
-        return super.dataToImage(DEFAULT_TYPE_RGB);
+    public BufferedImage renderAlphaDiscarded() {
+        return super.render(DEFAULT_TYPE_RGB);
     }
 
+
     @Override
-    protected BufferedImage dataToImage(int type) {
+    protected BufferedImage render(int type) {
 
-        BufferedImage bi = new BufferedImage(width, height, type);
+        BufferedImage rendered = new BufferedImage(width, height, type);
 
-        for (int i = 0; i < dataLength; i++)
-            bi.setRGB(i % width, i / width, (as[i] & 0xff) << 24 | (rs[i] & 0xff) << 16 | (gs[i] & 0xff) << 8 | (bs[i] & 0xff));
+        for (int i = 0; i < dataLength; i++)  // TODO
+            rendered.setRGB(i % width, i / width, (as[i] & 0xff) << 24 | (rs[i] & 0xff) << 16 | (gs[i] & 0xff) << 8 | (bs[i] & 0xff));
 
-        return bi;
+        return rendered;
     }
 
 

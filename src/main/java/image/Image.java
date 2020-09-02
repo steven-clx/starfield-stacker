@@ -136,9 +136,9 @@ public interface Image extends Cloneable {
 
     BufferedImage render();
 
-    BufferedImage renderAlphaMultipliedImage();
+    BufferedImage renderAlphaMultiplied();
 
-    BufferedImage renderAlphaDiscardedImage();
+    BufferedImage renderAlphaDiscarded();
 
     Image clone();
 

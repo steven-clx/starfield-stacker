@@ -89,9 +89,9 @@ public class PngWriter implements Writer {
             appliedConfig = config instanceof RgbaWriteConfig ? config : RgbaPngWriteConfig.DEFAULT;
 
             if (((RgbaWriteConfig) appliedConfig).isAlphaMultiplied)
-                exportedBufferedImage = image.renderAlphaMultipliedImage();
+                exportedBufferedImage = image.renderAlphaMultiplied();
             else
-                exportedBufferedImage = image.renderAlphaDiscardedImage();
+                exportedBufferedImage = image.renderAlphaDiscarded();
         }
 
         try {

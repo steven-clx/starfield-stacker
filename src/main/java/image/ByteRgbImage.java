@@ -261,27 +261,28 @@ public class ByteRgbImage extends AbstractImage implements Image {
 
     @Override
     public BufferedImage render() {
-        return dataToImage(type);
+        return render(type);
     }
 
     @Override
-    public BufferedImage renderAlphaMultipliedImage() {
-        return dataToImage(type);
+    public BufferedImage renderAlphaMultiplied() {
+        return render(type);
     }
 
     @Override
-    public BufferedImage renderAlphaDiscardedImage() {
-        return dataToImage(type);
+    public BufferedImage renderAlphaDiscarded() {
+        return render(type);
     }
 
-    protected BufferedImage dataToImage(int type) {
 
-        BufferedImage bi = new BufferedImage(width, height, type);
+    protected BufferedImage render(int type) {
 
-        for (int i = 0; i < dataLength; i++)
-            bi.setRGB(i % width, i / width, (rs[i] & 0xff) << 16 | (gs[i] & 0xff) << 8 | bs[i] & 0xff);
+        BufferedImage rendered = new BufferedImage(width, height, type);
 
-        return bi;
+        for (int i = 0; i < dataLength; i++)  // TODO
+            rendered.setRGB(i % width, i / width, (rs[i] & 0xff) << 16 | (gs[i] & 0xff) << 8 | bs[i] & 0xff);
+
+        return rendered;
     }
 
 

@@ -82,7 +82,7 @@ public class JpgWriter implements Writer {
                             ".jpg"));
 
             imageWriter.setOutput(stream);
-            imageWriter.write(null, new IIOImage(image.renderAlphaMultipliedImage(), null, null), param);
+            imageWriter.write(null, new IIOImage(image.renderAlphaMultiplied(), null, null), param);
 
             stream.close();
 
