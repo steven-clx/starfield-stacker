@@ -2,7 +2,6 @@ package reader;
 
 import image.ByteRgbImage;
 import image.ByteRgbaImage;
-import image.Image;
 
 import java.awt.image.BufferedImage;
 
@@ -13,7 +12,7 @@ public class ByteImageCreator implements ImageCreator {
     private ByteImageCreator() {}
 
     @Override
-    public Image createImage(BufferedImage bi, String fileName, String directory) {
+    public ByteRgbImage createImage(BufferedImage bi, String fileName, String directory) {
         if (bi.getColorModel().hasAlpha())
             return new ByteRgbaImage(bi, fileName, directory);
         else
@@ -21,7 +20,7 @@ public class ByteImageCreator implements ImageCreator {
     }
 
     @Override
-    public Image createImage(int width, int height, boolean hasAlpha) {
+    public ByteRgbImage createImage(int width, int height, boolean hasAlpha) {
         if (hasAlpha)
             return new ByteRgbaImage(width, height);
         else

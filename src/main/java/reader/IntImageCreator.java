@@ -1,6 +1,5 @@
 package reader;
 
-import image.Image;
 import image.IntRgbImage;
 import image.IntRgbaImage;
 
@@ -13,7 +12,7 @@ public class IntImageCreator implements ImageCreator {
     private IntImageCreator() {}
 
     @Override
-    public Image createImage(BufferedImage bi, String fileName, String directory) {
+    public IntRgbImage createImage(BufferedImage bi, String fileName, String directory) {
         if (bi.getColorModel().hasAlpha())
             return new IntRgbaImage(bi, fileName, directory);
         else
@@ -21,7 +20,7 @@ public class IntImageCreator implements ImageCreator {
     }
 
     @Override
-    public Image createImage(int width, int height, boolean hasAlpha) {
+    public IntRgbImage createImage(int width, int height, boolean hasAlpha) {
         if (hasAlpha)
             return new IntRgbaImage(width, height);
         else

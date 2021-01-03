@@ -68,7 +68,7 @@ public class PixelImage extends AbstractImage implements Image {
     }
 
 
-    public PixelImage(int width, int height) {
+    public PixelImage(int width, int height, boolean hasAlpha) {
 
         super();
 
@@ -77,12 +77,19 @@ public class PixelImage extends AbstractImage implements Image {
 
         dataLength = width * height;
 
-        hasAlpha = false;
-        type = DEFAULT_TYPE_RGB;
+        this.hasAlpha = hasAlpha;
 
-        pixels = new RgbPixel[dataLength];
-        for (int i = 0; i < dataLength; i++)
-            pixels[i] = new RgbPixel(0, 0, 0);
+        if (hasAlpha) {
+            type = DEFAULT_TYPE_RGBA;
+            pixels = new RgbaPixel[dataLength];
+            for (int i = 0; i < dataLength; i++)
+                pixels[i] = new RgbaPixel(0, 0, 0, 255);
+        } else {
+            type = DEFAULT_TYPE_RGB;
+            pixels = new RgbPixel[dataLength];
+            for (int i = 0; i < dataLength; i++)
+                pixels[i] = new RgbPixel(0, 0, 0);
+        }
     }
 
 

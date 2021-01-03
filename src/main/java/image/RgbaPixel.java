@@ -28,14 +28,6 @@ public class RgbaPixel extends RgbPixel implements Pixel {
     }
 
 
-    public RgbaPixel(int r, int g, int b, int a, int x, int y) {
-        this.r = (byte) r;
-        this.g = (byte) g;
-        this.b = (byte) b;
-        this.a = (byte) a;
-    }
-
-
     public RgbaPixel(RgbaPixel other) {
         r = other.r;
         g = other.g;

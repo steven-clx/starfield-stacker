@@ -10,27 +10,114 @@ public class Blend {
     public static void blend(Image base, Image overlay, float overlayOpacity) {
 
         if (base instanceof ByteRgbImage && overlay instanceof ByteRgbImage) {
-            blend((ByteRgbImage) base, (ByteRgbImage) overlay, overlayOpacity);
+            blendByte((ByteRgbImage) base, (ByteRgbImage) overlay, overlayOpacity);
             return;
         }
 
         if (base instanceof IntRgbImage && overlay instanceof IntRgbImage) {
-            blend((IntRgbImage) base, (IntRgbImage) overlay, overlayOpacity);
+            blendInt((IntRgbImage) base, (IntRgbImage) overlay, overlayOpacity);
             return;
         }
 
         if (base instanceof PixelImage && overlay instanceof PixelImage) {
-            blend((PixelImage) base, (PixelImage) overlay, overlayOpacity);
+            blendPixel((PixelImage) base, (PixelImage) overlay, overlayOpacity);
             return;
         }
 
-        throw new IllegalArgumentException("image type not compatible: " +
-                "base - " + base.getFileName() + " - "  + base.getClass() +
-                ", overlay - " + overlay.getFileName() + " - "  + overlay.getClass());
+        blendAny(base, overlay, overlayOpacity);
     }
 
 
-    public static void blend(PixelImage base, PixelImage overlay, float overlayOpacity) {
+    private static void blendAny(Image base, Image overlay, float overlayOpacity) {
+
+        Util.checkImageSize(base, overlay);
+
+        int dataLength = base.getDataLength();
+
+
+        // If the overlay is opaque, replace the base image's data with the overlay's data
+        if (!overlay.hasAlpha() && overlayOpacity >= 1.0f) {
+
+            // If the base image is translucent, replace the pixels' values,
+            // and set the alpha channel in each pixel to 255
+            if (base.hasAlpha()) {
+                for (int i = 0; i < dataLength; i++) {
+                    base.setR(i, overlay.getR(i));
+                    base.setG(i, overlay.getG(i));
+                    base.setB(i, overlay.getB(i));
+                    base.setA(i, 255);
+                }
+
+            // If the base image is opaque, replace the pixels' values
+            } else {
+                for (int i = 0; i < dataLength; i++) {
+                    base.setR(i, overlay.getR(i));
+                    base.setG(i, overlay.getG(i));
+                    base.setB(i, overlay.getB(i));
+                }
+            }
+
+            return;
+        }
+
+
+        // If both images are translucent, use the alpha blend algorithm,
+        // and calculate each overlay pixel's true alpha by multiplying the overlay opacity
+        if (base.hasAlpha() && overlay.hasAlpha()) {
+
+            for (int i = 0; i < dataLength; i++) {
+
+                float a1 = base.getA(i) / 255f;
+                float a2 = MathUtil.computeCompositeAlpha(overlay.getA(i), overlayOpacity);
+                float a12 = MathUtil.blendAlpha(a1, a2);
+
+                base.setR(i, MathUtil.blend(base.getR(i), overlay.getR(i), a1, a2, a12));
+                base.setG(i, MathUtil.blend(base.getG(i), overlay.getG(i), a1, a2, a12));
+                base.setB(i, MathUtil.blend(base.getB(i), overlay.getB(i), a1, a2, a12));
+                base.setA(i, Math.round(a12 * 255));
+            }
+
+
+        // If only the base image is translucent, use the alpha blend algorithm
+        } else if (base.hasAlpha()) {
+
+            for (int i = 0; i < dataLength; i++) {
+
+                float a1 = base.getA(i) / 255f;
+                float a12 = MathUtil.blendAlpha(a1, overlayOpacity);
+
+                base.setR(i, MathUtil.blend(base.getR(i), overlay.getR(i), a1, overlayOpacity, a12));
+                base.setG(i, MathUtil.blend(base.getG(i), overlay.getG(i), a1, overlayOpacity, a12));
+                base.setB(i, MathUtil.blend(base.getB(i), overlay.getB(i), a1, overlayOpacity, a12));
+                base.setA(i, Math.round(a12 * 255));
+            }
+
+
+        // If only the overlay is translucent, calculate each overlay pixel's true alpha by multiplying the overlay opacity
+        } else if (overlay.hasAlpha()) {
+
+            for (int i = 0; i < dataLength; i++) {
+
+                float a2 = MathUtil.computeCompositeAlpha(overlay.getA(i), overlayOpacity);
+
+                base.setR(i, MathUtil.blend(base.getR(i), overlay.getR(i), a2));
+                base.setG(i, MathUtil.blend(base.getG(i), overlay.getG(i), a2));
+                base.setB(i, MathUtil.blend(base.getB(i), overlay.getB(i), a2));
+            }
+
+
+        // If both images are opaque, blend each pixel with the overlay opacity
+        } else {
+            for (int i = 0; i < dataLength; i++) {
+                base.setR(i, MathUtil.blend(base.getR(i), overlay.getR(i), overlayOpacity));
+                base.setG(i, MathUtil.blend(base.getG(i), overlay.getG(i), overlayOpacity));
+                base.setB(i, MathUtil.blend(base.getB(i), overlay.getB(i), overlayOpacity));
+            }
+        }
+    }
+
+
+    private static void blendPixel(PixelImage base, PixelImage overlay, float overlayOpacity) {
 
         Util.checkImageSize(base, overlay);
 
@@ -43,8 +130,7 @@ public class Blend {
         // If the overlay is opaque, replace the base image's data with the overlay's data
         if (!overlay.hasAlpha() && overlayOpacity >= 1.0f) {
 
-            // If the overlay is opaque, it should be converted to opaque
-            // A blank BufferedImage with DEFAULT_TYPE_RGB will be created to hold the data
+            // If the base image is translucent, it should be converted to opaque
             if (base.hasAlpha()) {
 
                 for (int i = 0; i < dataLength; i++) {
@@ -90,6 +176,7 @@ public class Blend {
                     basePixels[i].blend(overlayPixels[i], overlayOpacity);
             }
 
+
         // If the overlay is opaque, it is guaranteed that its pixels do not have alpha,
         // therefore call blend(RgbPixel other, float opacity)
         } else {
@@ -100,7 +187,7 @@ public class Blend {
 
 
 
-    public static void blend(ByteRgbImage base, ByteRgbImage overlay, float overlayOpacity) {
+    private static void blendByte(ByteRgbImage base, ByteRgbImage overlay, float overlayOpacity) {
 
         Util.checkImageSize(base, overlay);
 
@@ -200,7 +287,7 @@ public class Blend {
 
 
 
-    public static void blend(IntRgbImage base, IntRgbImage overlay, float overlayOpacity) {
+    private static void blendInt(IntRgbImage base, IntRgbImage overlay, float overlayOpacity) {
 
         Util.checkImageSize(base, overlay);
 
